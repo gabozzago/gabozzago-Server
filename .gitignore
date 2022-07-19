@@ -35,3 +35,10 @@ out/
 
 ### VS Code ###
 .vscode/
+
+<<<<<<<<< Temporary merge branch 1
+/src/main/resources/application.yml
+
+=========
+*.yml
+>>>>>>>>> Temporary merge branch 2
