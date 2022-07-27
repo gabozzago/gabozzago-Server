@@ -1,4 +1,4 @@
-package com.wwg.gabozzago.domain;
+package com.wwg.gabozzago.domain.user.data.entity;
 
 import lombok.*;
 
