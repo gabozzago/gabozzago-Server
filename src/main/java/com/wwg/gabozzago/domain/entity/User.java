@@ -1,6 +1,7 @@
-package com.wwg.gabozzago.domain.user.data.entity;
+package com.wwg.gabozzago.domain.entity;
 
 import lombok.*;
+import org.springframework.context.annotation.Configuration;
 
 import javax.persistence.*;
 
@@ -12,9 +13,8 @@ import javax.persistence.*;
 @Builder
 public class User {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String name;
     private String email;
+    private String name;
     private String password;
-    private String img;
+    private String user_img;
 }
