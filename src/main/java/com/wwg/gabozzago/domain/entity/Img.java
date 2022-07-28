@@ -15,7 +15,7 @@ import javax.persistence.*;
 @Builder
 public class Img {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long img_id;
+    private Long id;
     private String url;
 
     @ManyToOne(cascade = CascadeType.REMOVE)

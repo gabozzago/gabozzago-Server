@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Builder
 public class Post {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long post_id;
+    private Long id;
     private String title;
     private String location;
     private String post_img;
