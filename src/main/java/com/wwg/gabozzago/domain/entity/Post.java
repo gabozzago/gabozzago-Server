@@ -1,11 +1,13 @@
 package com.wwg.gabozzago.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -23,4 +25,7 @@ public class Post {
     @ManyToOne(cascade = CascadeType.REMOVE)
     private User user;
 
+    @JsonIgnoreProperties({"post"})
+    @OneToMany(mappedBy = "post")
+    private List<PostLike> likeList;
 }

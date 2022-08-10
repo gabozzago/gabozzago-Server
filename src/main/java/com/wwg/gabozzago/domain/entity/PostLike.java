@@ -1,5 +1,6 @@
 package com.wwg.gabozzago.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -20,7 +21,11 @@ public class PostLike {
     private Long id;
 
     @ManyToOne(cascade = CascadeType.REMOVE)
+    @JsonIgnoreProperties({"postList"})
     private User user;
+
     @ManyToOne(cascade = CascadeType.REMOVE)
     private Post post;
+
+
 }
