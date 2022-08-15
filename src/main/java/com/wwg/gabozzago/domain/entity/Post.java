@@ -19,19 +19,19 @@ public class Post {
     private Long id;
     private String title;
     private String location;
-    private String post_img;
+    private String postImg;
     private String content;
 
-    @JsonIgnoreProperties({"post_List"})
+    @JsonIgnoreProperties({"postList"})
     @ManyToOne(cascade = CascadeType.REMOVE)
     private User user;
 
     @JsonIgnoreProperties({"post"})
     @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
-    private List<PostLike> like_List;
+    private List<PostLike> likeList;
 
 
     @JsonIgnoreProperties({"post"})
     @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
-    private List<Comment> comment_List;
+    private List<Comment> commentList;
 }

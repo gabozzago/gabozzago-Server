@@ -18,11 +18,11 @@ public class Comment {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String content;
-    private LocalDateTime create_Date;
+    private LocalDateTime createDate;
 
     @PrePersist
-    public void create_Date() {
-        this.create_Date = LocalDateTime.now();
+    public void createDate() {
+        this.createDate = LocalDateTime.now();
     }
 
     @ManyToOne(cascade = CascadeType.REMOVE)

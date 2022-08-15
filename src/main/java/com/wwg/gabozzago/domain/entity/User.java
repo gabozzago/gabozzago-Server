@@ -18,10 +18,10 @@ public class User {
     private String email;
     private String name;
     private String password;
-    private String user_img;
+    private String userImg;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties({"user"})
-    private List<Post> post_List;
+    private List<Post> postList;
 
 }
