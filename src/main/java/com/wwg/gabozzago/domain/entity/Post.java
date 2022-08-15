@@ -22,10 +22,16 @@ public class Post {
     private String post_img;
     private String content;
 
+    @JsonIgnoreProperties({"post_List"})
     @ManyToOne(cascade = CascadeType.REMOVE)
     private User user;
 
     @JsonIgnoreProperties({"post"})
-    @OneToMany(mappedBy = "post")
-    private List<PostLike> likeList;
+    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
+    private List<PostLike> like_List;
+
+
+    @JsonIgnoreProperties({"post"})
+    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
+    private List<Comment> comment_List;
 }

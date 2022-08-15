@@ -1,9 +1,11 @@
 package com.wwg.gabozzago.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.springframework.context.annotation.Configuration;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
@@ -18,5 +20,8 @@ public class User {
     private String password;
     private String user_img;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    @JsonIgnoreProperties({"user"})
+    private List<Post> post_List;
 
 }

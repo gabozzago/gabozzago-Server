@@ -21,7 +21,7 @@ public class PostLike {
     private Long id;
 
     @ManyToOne(cascade = CascadeType.REMOVE)
-    @JsonIgnoreProperties({"postList"})
+    @JsonIgnoreProperties({"post_List"})
     private User user;
 
     @ManyToOne(cascade = CascadeType.REMOVE)
