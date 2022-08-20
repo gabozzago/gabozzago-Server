@@ -1,4 +1,4 @@
-package com.wwg.gabozzago.global.properties;
+package com.wwg.gabozzago.global.security.properties;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

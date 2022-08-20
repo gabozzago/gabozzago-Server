@@ -1,4 +1,4 @@
-package com.wwg.gabozzago.global.auth;
+package com.wwg.gabozzago.global.security.auth;
 
 import com.wwg.gabozzago.domain.entity.User;
 import lombok.RequiredArgsConstructor;
