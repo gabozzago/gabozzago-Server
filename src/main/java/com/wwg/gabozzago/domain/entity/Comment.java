@@ -16,8 +16,13 @@ import java.time.LocalDateTime;
 @Builder
 public class Comment {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
+
+    @Column(name = "content")
     private String content;
+
+    @Column(name = "create_date")
     private LocalDateTime createDate;
 
     @PrePersist
@@ -26,7 +31,6 @@ public class Comment {
     }
 
     @ManyToOne(cascade = CascadeType.REMOVE)
-    @JsonIgnoreProperties({"post_List"})
     private User user;
 
     @ManyToOne(cascade = CascadeType.REMOVE)

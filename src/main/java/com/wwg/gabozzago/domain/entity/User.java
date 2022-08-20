@@ -15,13 +15,19 @@ import java.util.List;
 @Builder
 public class User {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "email")
     private String email;
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "password")
     private String password;
+
+    @Column(name = "user_img")
     private String userImg;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
-    @JsonIgnoreProperties({"user"})
     private List<Post> postList;
 
 }

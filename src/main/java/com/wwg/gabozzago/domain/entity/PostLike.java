@@ -6,10 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
 @NoArgsConstructor
@@ -18,10 +15,10 @@ import javax.persistence.ManyToOne;
 @Builder
 public class PostLike {
     @Id
+    @Column(name = "id")
     private Long id;
 
     @ManyToOne(cascade = CascadeType.REMOVE)
-    @JsonIgnoreProperties({"postList"})
     private User user;
 
     @ManyToOne(cascade = CascadeType.REMOVE)

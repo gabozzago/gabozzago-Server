@@ -16,22 +16,28 @@ import java.util.List;
 @Builder
 public class Post {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
+
+    @Column(name = "title")
     private String title;
+
+    @Column(name = "location")
     private String location;
+
+    @Column(name = "post_img")
     private String postImg;
+
+    @Column(name = "content")
     private String content;
 
-    @JsonIgnoreProperties({"postList"})
     @ManyToOne(cascade = CascadeType.REMOVE)
     private User user;
 
-    @JsonIgnoreProperties({"post"})
     @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
     private List<PostLike> likeList;
 
 
-    @JsonIgnoreProperties({"post"})
     @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
     private List<Comment> commentList;
 }
