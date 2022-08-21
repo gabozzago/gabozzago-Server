@@ -11,6 +11,7 @@ public enum ErrorCode {
     UNAUTHORIZED(401,"Unauthorized"),
     EXPIRED_TOKEN_EXCEPTION(401,"Expired Token"),
     INVALID_TOKEN_EXCEPTION(401,"Invalid Token"),
+    USER_NOT_FOUND(404,"User Not Fount"),
 
     UNKNOWN_ERROR(500,"Unknown Error");
 

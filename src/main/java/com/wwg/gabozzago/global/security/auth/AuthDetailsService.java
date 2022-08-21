@@ -1,6 +1,7 @@
 package com.wwg.gabozzago.global.security.auth;
 
 import com.wwg.gabozzago.domain.user.repository.UserRepository;
+import com.wwg.gabozzago.global.security.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -16,6 +17,6 @@ public class AuthDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findUserByEmail(username)
                 .map(AuthDetails::new)
-                .orElseThrow();
+                .orElseThrow(UserNotFoundException::new);
     }
 }
