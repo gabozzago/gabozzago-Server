@@ -8,7 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class PostDto {
+public class CreatePostRequestDto {
     private String title;
     private String location;
     private String post_img;
@@ -18,7 +18,7 @@ public class PostDto {
                 .title(title)
                 .content(content)
                 .location(location)
-                .post_img(post_img)
+                .postImg(post_img)
                 .build();
 
     }
