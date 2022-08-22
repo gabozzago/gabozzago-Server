@@ -1,4 +1,5 @@
 package com.wwg.gabozzago.domain.like.service;
 
-public interface LikeServiceImpl {
+public class LikeServiceImpl implements LikeService{
+
 }
