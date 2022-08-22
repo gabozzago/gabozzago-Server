@@ -1,4 +1,4 @@
 package com.wwg.gabozzago.domain.like.service;
 
-public interface LikeService {
+public interface PostLikeService {
 }

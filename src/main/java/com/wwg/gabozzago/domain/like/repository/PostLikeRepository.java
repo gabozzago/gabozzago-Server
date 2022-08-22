@@ -1,4 +1,4 @@
-package com.wwg.gabozzago.domain.post.repository;
+package com.wwg.gabozzago.domain.like.repository;
 
 import com.wwg.gabozzago.domain.entity.PostLike;
 import org.springframework.data.jpa.repository.JpaRepository;
