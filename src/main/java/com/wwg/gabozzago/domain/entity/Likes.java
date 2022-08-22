@@ -1,6 +1,5 @@
 package com.wwg.gabozzago.domain.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,7 +12,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Getter
 @Builder
-public class PostLike {
+public class Likes {
     @Id
     @Column(name = "id")
     private Long id;
@@ -23,6 +22,7 @@ public class PostLike {
 
     @ManyToOne(cascade = CascadeType.REMOVE)
     private Post post;
+
 
 
 }
