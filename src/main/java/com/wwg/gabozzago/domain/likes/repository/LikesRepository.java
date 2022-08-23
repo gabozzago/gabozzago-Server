@@ -13,5 +13,5 @@ public interface LikesRepository extends JpaRepository<Likes, Long> {
 
     @Modifying
     @Query(value = "DELETE FROM likes_tbl WHERE post_id = :postId AND user_id = :userId", nativeQuery = true)
-    void unlikes(Long postId, String email);
+    void unlikes(Long postId, String userId);
 }
