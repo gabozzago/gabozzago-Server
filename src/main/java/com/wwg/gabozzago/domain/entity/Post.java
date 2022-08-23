@@ -1,6 +1,5 @@
 package com.wwg.gabozzago.domain.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -35,7 +34,7 @@ public class Post {
     private User user;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
-    private List<PostLike> likeList;
+    private List<Likes> likesList;
 
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
