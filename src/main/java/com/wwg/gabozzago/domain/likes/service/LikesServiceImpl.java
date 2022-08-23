@@ -17,8 +17,15 @@ public class LikesServiceImpl implements LikesService {
 
     @Transactional
     @Override
-    public void likes(Long postId, String email) {
-        User user = userRepository.findUserByEmail(email);
+    public void likes(Long postId, String loginEmail) {
+        User user = userRepository.findUserByEmail(loginEmail);
         likesRepository.likes(postId, user.getEmail());
+    }
+
+    @Transactional
+    @Override
+    public void unlikes(Long postId, String loginEmail){
+        User user = userRepository.findUserByEmail(loginEmail);
+        likesRepository.unlikes(postId, user.getEmail());
     }
 }
