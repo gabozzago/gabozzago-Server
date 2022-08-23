@@ -27,6 +27,9 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     runtimeOnly 'mysql:mysql-connector-java'
+    //Junit5
+    testImplementation 'org.junit.platform:junit-platform-launcher:1.9.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.0'
 }
 
 tasks.named('test') {
