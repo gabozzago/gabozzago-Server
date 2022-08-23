@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Getter
 @Builder
 public class Likes {
-    @Id
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
