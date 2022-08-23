@@ -13,8 +13,8 @@ import javax.transaction.Transactional;
 public class PostServiceImpl implements PostService {
     private final PostRepository postRepository;
     @Override
-    public Long createPost(CreatePostRequestDto postDto) {
-       return postRepository.save(postDto.toEntity()).getId();
+    public Long save(CreatePostRequestDto requestDto) {
+       return postRepository.save(requestDto.toEntity()).getId();
 
     }
 }
