@@ -1,7 +1,7 @@
 package com.wwg.gabozzago.global.security.auth;
 
 import com.wwg.gabozzago.domain.user.repository.UserRepository;
-import com.wwg.gabozzago.global.security.exception.UserNotFoundException;
+import com.wwg.gabozzago.global.user.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
