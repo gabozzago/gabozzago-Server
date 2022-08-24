@@ -1,6 +1,5 @@
 package com.wwg.gabozzago.domain.post.service;
 
-import com.wwg.gabozzago.domain.entity.Post;
 import com.wwg.gabozzago.domain.post.dto.CreatePostRequestDto;
 import com.wwg.gabozzago.domain.post.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +13,7 @@ public class PostServiceImpl implements PostService {
     private final PostRepository postRepository;
     @Override
     @Transactional
-    public void save(final CreatePostRequestDto requestDto) {
-        Post post = requestDto.toEntity();
+    public void save(CreatePostRequestDto requestDto) {
+        postRepository.save(requestDto.toEntity());
     }
 }

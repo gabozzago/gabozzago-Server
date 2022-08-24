@@ -2,6 +2,7 @@ package com.wwg.gabozzago.controller;
 
 
 import com.wwg.gabozzago.domain.post.dto.CreatePostRequestDto;
+import com.wwg.gabozzago.domain.post.dto.PostSaveDto;
 import com.wwg.gabozzago.domain.post.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,8 +19,8 @@ public class PostApiController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/post/create")
-    public void save(@Valid @ModelAttribute CreatePostRequestDto requestDto) {
-        postService.save(requestDto);
+    public void save(@Valid @ModelAttribute PostSaveDto postSaveDto) {
+            postService.save(postSaveDto);
     }
 
 }
