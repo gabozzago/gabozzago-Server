@@ -1,6 +1,5 @@
 package com.wwg.gabozzago.global.security;
 
-import com.wwg.gabozzago.global.security.auth.AuthDetails;
 import com.wwg.gabozzago.global.security.auth.AuthDetailsService;
 import com.wwg.gabozzago.global.security.exception.ExpiredTokenException;
 import com.wwg.gabozzago.global.security.exception.InvalidTokenException;

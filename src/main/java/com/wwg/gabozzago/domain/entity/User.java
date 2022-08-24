@@ -16,13 +16,10 @@ import java.util.List;
 @Builder
 public class User {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "email")
     private String email;
 
     @Nullable()
-    @Column(name = "name")
     private String name;
-
     @Nullable()
     @Column(name = "user_img")
     private String userImg;

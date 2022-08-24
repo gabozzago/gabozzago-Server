@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.engine.internal.Cascade;
 
 import javax.persistence.*;
 
@@ -15,12 +14,8 @@ import javax.persistence.*;
 @Builder
 public class Img {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
-
-    @Column(name = "url")
     private String url;
-
     @ManyToOne(cascade = CascadeType.REMOVE)
     private Post post;
 }
