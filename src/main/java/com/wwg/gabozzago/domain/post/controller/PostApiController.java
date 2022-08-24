@@ -1,4 +1,4 @@
-package com.wwg.gabozzago.controller;
+package com.wwg.gabozzago.domain.post.controller;
 
 
 import com.wwg.gabozzago.domain.post.dto.CreatePostRequestDto;
@@ -9,17 +9,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.processing.FilerException;
 import javax.validation.Valid;
 
 @RequiredArgsConstructor
 @RestController
-@Controller
+@RequestMapping("/post")
 public class PostApiController {
     private final PostService postService;
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/post/create")
-    public void save(@Valid @ModelAttribute PostSaveDto postSaveDto) {
+    @PostMapping("/create")
+    public void save(@RequestBody PostSaveDto postSaveDto) throws FilerException {
             postService.save(postSaveDto);
     }
 
