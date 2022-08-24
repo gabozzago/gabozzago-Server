@@ -31,10 +31,10 @@ jobs:
       with:
         arguments: build
     - name: Test with Gradle
-      run: ./gradlew test
+      run: ./gradlew --info test
 
     - name: Publish Unit Test Results
       uses: EnricoMi/publish-unit-test-result-action@v1
       if: ${{ always() }}
       with:
-        files:
+        files: build/test-results/**/*.xml
