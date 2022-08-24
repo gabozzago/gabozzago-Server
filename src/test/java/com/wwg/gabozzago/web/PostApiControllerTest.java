@@ -28,6 +28,7 @@ public class PostApiControllerTest {
                 .title("1번 게시글 제목")
                 .content("1번 게시글 내용")
                 .build();
+
                 //게시글 저장
 
 

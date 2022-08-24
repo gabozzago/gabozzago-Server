@@ -17,5 +17,4 @@ public class PostServiceImpl implements PostService {
     public void save(PostSaveDto postSaveDto) throws FilerException {
         postRepository.save(postSaveDto.toEntity());
     }
-
 }

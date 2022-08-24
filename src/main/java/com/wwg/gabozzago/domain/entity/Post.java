@@ -34,7 +34,7 @@ public class Post {
     private User user;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
-    private List<PostLike> likeList;
+    private List<Likes> likesList;
 
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
