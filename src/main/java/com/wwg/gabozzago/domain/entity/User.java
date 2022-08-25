@@ -15,9 +15,8 @@ import java.util.List;
 @Getter
 @Builder
 public class User {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
     private String email;
-
     @Nullable()
     private String name;
     @Nullable()

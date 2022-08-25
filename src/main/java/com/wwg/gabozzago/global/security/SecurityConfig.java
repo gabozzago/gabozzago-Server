@@ -6,6 +6,7 @@ import com.wwg.gabozzago.global.security.filter.JwtTokenFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
@@ -34,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfiguration {
                 .authorizeRequests()
                 .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
 
-                //라우터 주소 작성
+                .antMatchers(HttpMethod.POST,"auth/oauth").permitAll()
 
                 .anyRequest().denyAll()
                 .and()
