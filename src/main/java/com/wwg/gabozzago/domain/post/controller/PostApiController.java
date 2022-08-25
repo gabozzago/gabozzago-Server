@@ -1,7 +1,7 @@
 package com.wwg.gabozzago.domain.post.controller;
 
 
-import com.wwg.gabozzago.domain.post.dto.PostSaveDto;
+import com.wwg.gabozzago.domain.post.dto.CreatePostRequestDto;
 import com.wwg.gabozzago.domain.post.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,8 +18,8 @@ public class PostApiController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/create")
-    public void save(@RequestBody PostSaveDto postSaveDto) throws FilerException {
-            postService.save(postSaveDto);
+    public void save(@RequestBody CreatePostRequestDto createPostRequestDto) throws FilerException {
+            postService.save(createPostRequestDto);
     }
 
 }
