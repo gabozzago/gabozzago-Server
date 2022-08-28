@@ -11,6 +11,7 @@ import com.wwg.gabozzago.domain.entity.User;
 import com.wwg.gabozzago.domain.user.repository.UserRepository;
 import com.wwg.gabozzago.global.security.JwtTokenProvider;
 import com.wwg.gabozzago.global.security.properties.GoogleProperties;
+import com.wwg.gabozzago.global.security.properties.JwtProperties;
 import com.wwg.gabozzago.global.user.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -28,9 +29,11 @@ public class LoginServiceImpl implements LoginService {
     private final GoogleProperties googleProperties;
     @Override
     public LoginResponseDto login(LoginRequestDto loginRequestDto){
+        System.out.println("함수실행");
         RestTemplate restTemplate = new RestTemplate();
         String requestUrl = UriComponentsBuilder.fromHttpUrl(googleProperties.getAuthUrl()+"/tokeninfo")
                             .queryParam("id_token",loginRequestDto.getIdToken()).toUriString();
+        System.out.println(requestUrl);
         String result = restTemplate.getForObject(requestUrl, String.class);
 
         try {

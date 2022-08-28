@@ -13,17 +13,19 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsUtils;
 
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
-public class SecurityConfig extends WebSecurityConfiguration {
+public class SecurityConfig {
     private final ObjectMapper objectMapper;
     private final JwtTokenProvider jwtTokenProvider;
-    public void configure(HttpSecurity http) throws Exception {
-        http
+    @Bean
+    public SecurityFilterChain configure(HttpSecurity http) throws Exception {
+        return http
                 .cors().disable()
                 .formLogin().disable()
                 .csrf().disable()
@@ -35,7 +37,7 @@ public class SecurityConfig extends WebSecurityConfiguration {
                 .authorizeRequests()
                 .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
 
-                .antMatchers(HttpMethod.POST,"auth/oauth").permitAll()
+                .antMatchers(HttpMethod.POST,"/auth").permitAll()
 
                 .anyRequest().denyAll()
                 .and()
@@ -44,7 +46,9 @@ public class SecurityConfig extends WebSecurityConfiguration {
                 .and()
 
                 .addFilterAfter(new JwtTokenFilter (jwtTokenProvider), UsernamePasswordAuthenticationFilter.class)
-                .addFilterBefore(new JwtExceptionHandler (objectMapper),UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(new JwtExceptionHandler (objectMapper),UsernamePasswordAuthenticationFilter.class)
+                .build();
+
     }
     @Bean
     PasswordEncoder passwordEncoder(){

@@ -1,5 +1,6 @@
 package com.wwg.gabozzago.domain.auth.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 

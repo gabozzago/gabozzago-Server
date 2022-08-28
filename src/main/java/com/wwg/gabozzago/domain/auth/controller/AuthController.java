@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("auth")
+@RequestMapping("/auth")
 public class AuthController {
     private final LoginService loginService;
-    @PostMapping("oauth")
+    @PostMapping
     public ResponseEntity<LoginResponseDto> login(@RequestBody LoginRequestDto loginRequestDto){
         LoginResponseDto tokenResponseDto = loginService.login(loginRequestDto);
-        return new ResponseEntity<>(tokenResponseDto, HttpStatus.valueOf(tokenResponseDto.getStatus()));
+        return new ResponseEntity(tokenResponseDto, HttpStatus.valueOf(tokenResponseDto.getStatus()));
     }
 }

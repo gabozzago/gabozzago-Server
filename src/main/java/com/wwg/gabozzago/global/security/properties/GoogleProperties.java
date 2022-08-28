@@ -11,7 +11,6 @@ import org.springframework.boot.context.properties.ConstructorBinding;
 @ConfigurationProperties(prefix = "google")
 public class GoogleProperties {
     private final String clientId;
-    private final String clientSecret;
     private final String authUrl;
     private final String scope;
 

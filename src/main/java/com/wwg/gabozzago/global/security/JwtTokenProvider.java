@@ -20,9 +20,6 @@ import java.util.Date;
 public class JwtTokenProvider {
     private final JwtProperties jwtProperties;
     private final AuthDetailsService authDetailsService;
-
-
-
     public String generateAccessToken(String email){
         return generateToken(email,"access",jwtProperties.getAccessSecret(),60*15);
     }
@@ -53,12 +50,11 @@ public class JwtTokenProvider {
         }
     }
     private String getTokenSubject(String token,String secret){
-        return getTokenBody(token,secret).get("email",String.class);
+        return getTokenBody(token,secret).getSubject();
     }
     private String generateToken(String email,String type,String secret,Integer exp){
         return Jwts.builder()
                 .signWith(SignatureAlgorithm.HS256, Base64.getEncoder().encodeToString(secret.getBytes()))
-                .claim("email",email)
                 .claim("type",type)
                 .setIssuedAt(new Date())
                 .setSubject(email)
