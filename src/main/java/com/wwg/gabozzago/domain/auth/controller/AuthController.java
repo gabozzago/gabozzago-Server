@@ -2,6 +2,7 @@ package com.wwg.gabozzago.domain.auth.controller;
 
 import com.wwg.gabozzago.domain.auth.dto.request.LoginRequestDto;
 import com.wwg.gabozzago.domain.auth.dto.response.LoginResponseDto;
+import com.wwg.gabozzago.domain.auth.dto.response.TokenResponseDto;
 import com.wwg.gabozzago.domain.auth.service.LoginService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,9 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/auth")
 public class AuthController {
     private final LoginService loginService;
-    @PostMapping
+    @PostMapping("/oauth")
     public ResponseEntity<LoginResponseDto> login(@RequestBody LoginRequestDto loginRequestDto){
-        LoginResponseDto tokenResponseDto = loginService.login(loginRequestDto);
-        return new ResponseEntity(tokenResponseDto, HttpStatus.valueOf(tokenResponseDto.getStatus()));
+        LoginResponseDto loginResponseDto = loginService.login(loginRequestDto);
+        TokenResponseDto tokenResponseDto = new TokenResponseDto(loginResponseDto.getAccessToken(),loginResponseDto.getRefreshToken(),loginResponseDto.getAccessExp(),loginResponseDto.getRefreshExp());
+        return new ResponseEntity(tokenResponseDto, HttpStatus.valueOf(loginResponseDto.getStatus()));
     }
 }
