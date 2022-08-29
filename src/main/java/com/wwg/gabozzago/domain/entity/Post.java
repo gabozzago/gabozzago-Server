@@ -15,15 +15,9 @@ import java.util.List;
 @Builder
 public class Post {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
-
-    @Column(name = "title")
     private String title;
-
-    @Column(name = "location")
     private String location;
-
     @Column(name = "post_img")
     private String postImg;
 

@@ -18,14 +18,14 @@ public class LikesServiceImpl implements LikesService {
     @Transactional
     @Override
     public void likes(Long postId, String loginEmail) {
-        User user = userRepository.findUserByEmail(loginEmail);
+        User user = userRepository.findUserByEmail(loginEmail).orElseThrow();
         likesRepository.likes(postId, user.getEmail());
     }
 
     @Transactional
     @Override
     public void unlikes(Long postId, String loginEmail){
-        User user = userRepository.findUserByEmail(loginEmail);
+        User user = userRepository.findUserByEmail(loginEmail).orElseThrow();
         likesRepository.unlikes(postId, user.getEmail());
     }
 }
