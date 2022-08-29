@@ -1,6 +1,6 @@
 package com.wwg.gabozzago.global.security.auth;
 
-import com.wwg.gabozzago.domain.user.repository.entity.User;
+import com.wwg.gabozzago.domain.user.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

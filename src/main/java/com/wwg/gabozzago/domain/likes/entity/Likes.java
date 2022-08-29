@@ -2,7 +2,6 @@ package com.wwg.gabozzago.domain.likes.entity;
 
 import com.wwg.gabozzago.domain.post.entity.Post;
 import com.wwg.gabozzago.domain.user.entity.User;
-import com.wwg.gabozzago.domain.user.repository.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
