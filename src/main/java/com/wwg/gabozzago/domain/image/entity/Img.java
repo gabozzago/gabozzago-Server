@@ -1,5 +1,6 @@
-package com.wwg.gabozzago.domain.entity;
+package com.wwg.gabozzago.domain.image.entity;
 
+import com.wwg.gabozzago.domain.post.entity.Post;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

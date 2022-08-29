@@ -1,6 +1,6 @@
 package com.wwg.gabozzago.global.user.utils.impl;
 
-import com.wwg.gabozzago.domain.entity.User;
+import com.wwg.gabozzago.domain.user.entity.User;
 import com.wwg.gabozzago.domain.user.repository.UserRepository;
 import com.wwg.gabozzago.global.user.exception.UserNotFoundException;
 import com.wwg.gabozzago.global.user.utils.userUtils;

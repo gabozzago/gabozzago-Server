@@ -1,5 +1,8 @@
-package com.wwg.gabozzago.domain.entity;
+package com.wwg.gabozzago.domain.post.entity;
 
+import com.wwg.gabozzago.domain.comment.entity.Comment;
+import com.wwg.gabozzago.domain.user.entity.User;
+import com.wwg.gabozzago.domain.likes.entity.Likes;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

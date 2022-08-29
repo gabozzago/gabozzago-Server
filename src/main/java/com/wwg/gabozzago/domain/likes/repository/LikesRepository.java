@@ -1,6 +1,7 @@
 package com.wwg.gabozzago.domain.likes.repository;
 
-import com.wwg.gabozzago.domain.entity.Likes;
+import com.wwg.gabozzago.domain.likes.entity.Likes;
+import com.wwg.gabozzago.domain.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

@@ -15,7 +15,6 @@ import javax.annotation.processing.FilerException;
 public class PostApiController {
     private final PostService postService;
 
-
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/create")
     public void save(@RequestBody CreatePostRequestDto createPostRequestDto) throws FilerException {

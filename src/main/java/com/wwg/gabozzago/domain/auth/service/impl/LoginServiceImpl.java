@@ -1,6 +1,5 @@
 package com.wwg.gabozzago.domain.auth.service.impl;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
 import com.google.api.client.http.HttpTransport;
@@ -9,9 +8,8 @@ import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.wwg.gabozzago.domain.auth.dto.request.LoginRequestDto;
 import com.wwg.gabozzago.domain.auth.dto.response.LoginResponseDto;
-import com.wwg.gabozzago.domain.auth.dto.response.TokenResponseDto;
 import com.wwg.gabozzago.domain.auth.service.LoginService;
-import com.wwg.gabozzago.domain.entity.User;
+import com.wwg.gabozzago.domain.user.entity.User;
 import com.wwg.gabozzago.domain.user.repository.UserRepository;
 import com.wwg.gabozzago.global.security.JwtTokenProvider;
 import com.wwg.gabozzago.global.security.exception.InvalidTokenException;

@@ -1,7 +1,8 @@
-package com.wwg.gabozzago.domain.post.service;
+package com.wwg.gabozzago.domain.post.service.Impl;
 
 import com.wwg.gabozzago.domain.post.dto.CreatePostRequestDto;
 import com.wwg.gabozzago.domain.post.repository.PostRepository;
+import com.wwg.gabozzago.domain.post.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

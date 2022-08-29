@@ -1,14 +1,15 @@
-package com.wwg.gabozzago.domain.likes.service;
+package com.wwg.gabozzago.domain.likes.service.Impl;
 
-import com.wwg.gabozzago.domain.entity.User;
+import com.wwg.gabozzago.domain.likes.service.LikesService;
+import com.wwg.gabozzago.domain.user.entity.User;
 import com.wwg.gabozzago.domain.likes.repository.LikesRepository;
 import com.wwg.gabozzago.domain.user.repository.UserRepository;
+import com.wwg.gabozzago.global.user.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Slf4j
+
 @RequiredArgsConstructor
 @Service
 public class LikesServiceImpl implements LikesService {
@@ -17,15 +18,15 @@ public class LikesServiceImpl implements LikesService {
 
     @Transactional
     @Override
-    public void likes(Long postId, String loginEmail) {
-        User user = userRepository.findUserByEmail(loginEmail).orElseThrow();
+    public void likes(Long postId, String Email) {
+        User user = userRepository.findUserByEmail(Email).orElseThrow(UserNotFoundException::new);
         likesRepository.likes(postId, user.getEmail());
     }
 
     @Transactional
     @Override
-    public void unlikes(Long postId, String loginEmail){
-        User user = userRepository.findUserByEmail(loginEmail).orElseThrow();
+    public void unlikes(Long postId, String Email){
+        User user = userRepository.findUserByEmail(Email).orElseThrow(UserNotFoundException::new);
         likesRepository.unlikes(postId, user.getEmail());
     }
 }

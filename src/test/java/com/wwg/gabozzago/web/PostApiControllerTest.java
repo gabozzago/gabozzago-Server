@@ -2,18 +2,11 @@ package com.wwg.gabozzago.web;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.wwg.gabozzago.domain.entity.Post;
-import com.wwg.gabozzago.domain.post.dto.CreatePostRequestDto;
+import com.wwg.gabozzago.domain.post.entity.Post;
 import com.wwg.gabozzago.domain.post.repository.PostRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringBootConfiguration;
-import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-
-import java.util.List;
 
 @SpringBootConfiguration
 

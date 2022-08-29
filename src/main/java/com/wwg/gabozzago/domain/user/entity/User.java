@@ -1,8 +1,7 @@
-package com.wwg.gabozzago.domain.entity;
+package com.wwg.gabozzago.domain.user.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.wwg.gabozzago.domain.post.entity.Post;
 import lombok.*;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
@@ -33,3 +32,4 @@ public class User {
         this.refreshToken = refreshToken;
     }
 }
+
