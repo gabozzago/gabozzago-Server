@@ -20,7 +20,8 @@ public class PostServiceImpl implements PostService {
     @Override
     @Transactional
     public void save(CreatePostRequestDto createPostRequestDto){
-        postRepository.save(createPostRequestDto.toEntity());
+        Post post = createPostRequestDto.toEntity();
+        postRepository.save(post);
     }
     //게시물 삭제
     @Override
