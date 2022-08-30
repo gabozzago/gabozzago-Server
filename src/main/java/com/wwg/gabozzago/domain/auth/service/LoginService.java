@@ -1,8 +1,8 @@
 package com.wwg.gabozzago.domain.auth.service;
 
-import com.wwg.gabozzago.domain.auth.dto.request.LoginRequestDto;
-import com.wwg.gabozzago.domain.auth.dto.response.LoginResponseDto;
+import com.wwg.gabozzago.domain.auth.data.dto.LoginDto;
+import com.wwg.gabozzago.domain.auth.data.request.LoginRequest;
 
 public interface LoginService {
-    LoginResponseDto login(LoginRequestDto loginRequestDto);
+    LoginDto login(LoginRequest loginRequest);
 }

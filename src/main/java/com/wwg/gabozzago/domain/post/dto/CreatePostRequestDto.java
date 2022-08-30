@@ -10,10 +10,14 @@ import lombok.*;
 public class CreatePostRequestDto {
     private String title;
     private String content;
+    private String location;
+    private String postImg;
     public Post toEntity() {
         return Post.builder()
                 .title(title)
                 .content(content)
+                .location(location)
+                .postImg(postImg)
                 .build();
 
     }
