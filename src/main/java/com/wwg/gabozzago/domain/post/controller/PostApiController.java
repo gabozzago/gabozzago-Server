@@ -20,5 +20,8 @@ public class PostApiController {
     public void save(@RequestBody CreatePostRequestDto createPostRequestDto) throws FilerException {
             postService.save(createPostRequestDto);
     }
-
+    @DeleteMapping("/delete/{id}")
+        public void delete(@PathVariable Long id){
+             postService.delete(id);
+    }
 }
