@@ -19,7 +19,7 @@ public class PostServiceImpl implements PostService {
     //게시물 생성
     @Override
     @Transactional
-    public void save(CreatePostRequestDto createPostRequestDto) throws FilerException {
+    public void save(CreatePostRequestDto createPostRequestDto){
         postRepository.save(createPostRequestDto.toEntity());
     }
     //게시물 삭제
