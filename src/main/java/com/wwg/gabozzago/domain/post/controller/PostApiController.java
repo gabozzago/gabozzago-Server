@@ -14,12 +14,13 @@ import javax.annotation.processing.FilerException;
 @RequestMapping("/post")
 public class PostApiController {
     private final PostService postService;
-
+    //게시물 생성
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/create")
     public void save(@RequestBody CreatePostRequestDto createPostRequestDto) throws FilerException {
             postService.save(createPostRequestDto);
     }
+    //게시물 삭제
     @DeleteMapping("/delete/{id}")
         public void delete(@PathVariable Long id){
              postService.delete(id);
