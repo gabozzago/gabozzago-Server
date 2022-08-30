@@ -16,12 +16,13 @@ import javax.transaction.Transactional;
 @RequiredArgsConstructor
 public class PostServiceImpl implements PostService {
     private final PostRepository postRepository;
+    //게시물 생성
     @Override
     @Transactional
     public void save(CreatePostRequestDto createPostRequestDto) throws FilerException {
         postRepository.save(createPostRequestDto.toEntity());
     }
-
+    //게시물 삭제
     @Override
     public void delete(Long id) {
         Post post = postRepository.findById(id).orElseThrow(UserNotFoundException::new);
