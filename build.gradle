@@ -29,17 +29,13 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'mysql:mysql-connector-java'
     annotationProcessor 'org.projectlombok:lombok'
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     runtimeOnly 'mysql:mysql-connector-java'
-    // Use ConfigurationProperties
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
-    //aws
-    implementation platform('com.amazonaws:aws-java-sdk-bom:1.11.228')
-    implementation 'com.amazonaws:aws-java-sdk-s3'
-    implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
+    //Junit5
+    testImplementation 'org.junit.platform:junit-platform-launcher:1.9.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.0'
 }
-
-
 
 tasks.named('test') {
     useJUnitPlatform()

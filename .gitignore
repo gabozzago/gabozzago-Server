@@ -38,6 +38,3 @@ out/
 
 *.yml
 .DS_Store
-
-### AWS ###
-src/main/resources/application.yml
