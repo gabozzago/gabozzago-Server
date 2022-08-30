@@ -27,7 +27,7 @@ public class PostApiController {
     @PostMapping("/{postId}/likes")
     public ResponseEntity<?> likes(@PathVariable Long postId){
         likesService.likes(postId);
-        return  new ResponseEntity<>("좋아여 성공",HttpStatus.OK);
+        return new ResponseEntity<>("좋아여 성공",HttpStatus.OK);
     }
 
     @DeleteMapping("/{postId}/unlikes")
