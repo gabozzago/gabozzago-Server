@@ -10,4 +10,11 @@ public class TokenResponseDto {
     private final String refreshToken;
     private final Integer accessExp;
     private final Integer refreshExp;
+
+    public TokenResponseDto(TokenResponseDto tokenResponseDto) {
+        this.accessToken = tokenResponseDto.getAccessToken();
+        this.accessExp = tokenResponseDto.getAccessExp();
+        this.refreshToken = tokenResponseDto.getRefreshToken();
+        this.refreshExp = tokenResponseDto.getRefreshExp();
+    }
 }

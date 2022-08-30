@@ -20,7 +20,7 @@ public class AuthController {
     @PostMapping("/oauth")
     public ResponseEntity<LoginResponseDto> login(@RequestBody LoginRequestDto loginRequestDto){
         LoginResponseDto loginResponseDto = loginService.login(loginRequestDto);
-        TokenResponseDto tokenResponseDto = new TokenResponseDto(loginResponseDto.getAccessToken(),loginResponseDto.getRefreshToken(),loginResponseDto.getAccessExp(),loginResponseDto.getRefreshExp());
+        TokenResponseDto tokenResponseDto = new TokenResponseDto(loginResponseDto.getTokenResponseDto());
         return new ResponseEntity(tokenResponseDto, HttpStatus.valueOf(loginResponseDto.getStatus()));
     }
 }
