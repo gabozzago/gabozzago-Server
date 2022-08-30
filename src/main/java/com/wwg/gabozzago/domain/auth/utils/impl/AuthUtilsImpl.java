@@ -6,9 +6,8 @@ import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
-import com.wwg.gabozzago.domain.auth.dto.response.TokenResponseDto;
+import com.wwg.gabozzago.domain.auth.data.dto.TokenDto;
 import com.wwg.gabozzago.domain.auth.utils.AuthUtils;
-import com.wwg.gabozzago.domain.user.repository.UserRepository;
 import com.wwg.gabozzago.global.security.JwtTokenProvider;
 import com.wwg.gabozzago.global.security.properties.GoogleProperties;
 import lombok.RequiredArgsConstructor;
@@ -26,12 +25,12 @@ public class AuthUtilsImpl implements AuthUtils {
 
 
     @Override
-    public TokenResponseDto generateTokenResponse(String email) {
+    public TokenDto generateTokenResponse(String email) {
         String accessToken = jwtTokenProvider.generateAccessToken(email);
         String refreshToken = jwtTokenProvider.generateRefreshToken(email);
         Integer accessExp = 60 * 15;
         Integer refreshExp = 60 * 60 * 24 * 7;
-        return new TokenResponseDto(accessToken,refreshToken,accessExp,refreshExp);
+        return new TokenDto(accessToken,refreshToken,accessExp,refreshExp);
     }
     public GoogleIdToken generateIdToken(String idToken) throws GeneralSecurityException, IOException {
         HttpTransport transport = new NetHttpTransport();
