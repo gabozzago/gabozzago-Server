@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service
-public class LikesServiceImpl implements LikesService {
+public class  LikesServiceImpl implements LikesService {
     private final LikesRepository likesRepository;
     private final UserRepository userRepository;
 
