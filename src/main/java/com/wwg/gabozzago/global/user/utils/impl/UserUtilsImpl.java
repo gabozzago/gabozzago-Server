@@ -3,14 +3,14 @@ package com.wwg.gabozzago.global.user.utils.impl;
 import com.wwg.gabozzago.domain.user.entity.User;
 import com.wwg.gabozzago.domain.user.repository.UserRepository;
 import com.wwg.gabozzago.global.user.exception.UserNotFoundException;
-import com.wwg.gabozzago.global.user.utils.userUtils;
+import com.wwg.gabozzago.global.user.utils.UserUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class userUtilsImpl implements userUtils {
+public class UserUtilsImpl implements UserUtils {
     private final UserRepository userRepository;
 
     @Override

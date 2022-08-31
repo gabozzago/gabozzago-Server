@@ -1,14 +1,12 @@
 package com.wwg.gabozzago.domain.post.controller;
 
 
-import com.wwg.gabozzago.domain.post.dto.CreatePostRequestDto;
+import com.wwg.gabozzago.domain.post.data.request.CreatePostRequestDto;
 import com.wwg.gabozzago.domain.post.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import javax.annotation.processing.FilerException;
 
 @RequiredArgsConstructor
 @RestController

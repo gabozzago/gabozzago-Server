@@ -36,7 +36,7 @@ dependencies {
     testImplementation 'org.junit.platform:junit-platform-launcher:1.9.0'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.9.0'
     //aws
-    implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
+    //implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
 
 
 }
