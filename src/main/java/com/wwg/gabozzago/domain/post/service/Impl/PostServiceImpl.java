@@ -1,15 +1,13 @@
 package com.wwg.gabozzago.domain.post.service.Impl;
 
-import com.wwg.gabozzago.domain.post.dto.CreatePostRequestDto;
+import com.wwg.gabozzago.domain.post.data.request.CreatePostRequestDto;
 import com.wwg.gabozzago.domain.post.entity.Post;
 import com.wwg.gabozzago.domain.post.repository.PostRepository;
 import com.wwg.gabozzago.domain.post.service.PostService;
 import com.wwg.gabozzago.global.user.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.processing.FilerException;
 import javax.transaction.Transactional;
 
 @Service

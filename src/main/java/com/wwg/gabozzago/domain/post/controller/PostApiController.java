@@ -1,7 +1,7 @@
 package com.wwg.gabozzago.domain.post.controller;
 
 
-import com.wwg.gabozzago.domain.post.dto.CreatePostRequestDto;
+import com.wwg.gabozzago.domain.post.data.request.CreatePostRequestDto;
 import com.wwg.gabozzago.domain.post.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/post") //TODO 지인호 | /api/v1/post 로 rename 하는게 좋아보여요. (하위호환성을 위한 버저닝 처리)
+@RequestMapping("/post")
 public class PostApiController {
     private final PostService postService;
     //게시물 생성
