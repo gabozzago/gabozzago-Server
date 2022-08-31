@@ -1,5 +1,7 @@
 package com.wwg.gabozzago.domain.auth.service;
 
-public interface RefreshTokenService {
+import com.wwg.gabozzago.domain.auth.data.response.TokenResponse;
 
+public interface RefreshTokenService {
+    TokenResponse refresh(String refreshToken);
 }
