@@ -17,11 +17,17 @@ import javax.annotation.processing.FilerException;
 public class PostApiController {
     private final PostService postService;
     private final LikesService likesService;
-
-    @ResponseStatus(HttpStatus.CREATED)
+    //게시물 생성
     @PostMapping("/create")
-    public void save(@RequestBody CreatePostRequestDto createPostRequestDto) throws FilerException {
-            postService.save(createPostRequestDto);
+    public ResponseEntity<Void> save(@RequestBody CreatePostRequestDto createPostRequestDto){
+        postService.save(createPostRequestDto);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+    //게시물 삭제
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void>delete(@PathVariable Long id){
+        postService.delete(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping("/likes/{postId}")

@@ -1,14 +1,14 @@
-package com.wwg.gabozzago.domain.auth.dto.request;
+package com.wwg.gabozzago.domain.auth.data.request;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import lombok.*;
 
 @Getter
-public class LoginRequestDto {
+public class LoginRequest {
     private final String idToken;
 
     @JsonCreator
-    public LoginRequestDto(String idToken) {
+    public LoginRequest(String idToken) {
         this.idToken = idToken;
     }
 }

@@ -31,5 +31,11 @@ public class User {
     public void updateRefreshToken(String refreshToken){
         this.refreshToken = refreshToken;
     }
+    public User(String email, String refreshToken){
+        this.email = email;
+        this.refreshToken = refreshToken;
+        this.name = null;
+        this.userImg = null;
+    }
 }
 
