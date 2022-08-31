@@ -14,7 +14,8 @@ public class AuthConverterImpl implements AuthConverter{
         TokenResponse tokenResponse = toTokenResponse(loginDto.getTokenDto());
         return new LoginResponse(tokenResponse, loginDto.getStatus());
     }
-    private TokenResponse toTokenResponse(TokenDto tokenDto){
+    @Override
+    public TokenResponse toTokenResponse(TokenDto tokenDto){
         return new TokenResponse(tokenDto.getAccessToken(), tokenDto.getRefreshToken(), tokenDto.getAccessExp(), tokenDto.getRefreshExp());
     }
 }
