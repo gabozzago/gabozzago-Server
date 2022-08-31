@@ -2,6 +2,7 @@ package com.wwg.gabozzago.domain.post.service.Impl;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.wwg.gabozzago.domain.post.service.AwsS3Service;
@@ -16,6 +17,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -46,8 +48,18 @@ public class AwsS3ServiceImpl implements AwsS3Service {
         return fileNameList;
     }
 
-    private String createFileName(String originalFilename) {
-
+    private String createFileName(String fileName) {
+        return UUID.randomUUID().toString().concat(getFileExtension(fileName));
+    }
+    public void deleteImage(String fileName) {
+        amazonS3.deleteObject(new DeleteObjectRequest(bucket, fileName));
+    }
+    private String getFileExtension(String fileName) {
+        try {
+            return fileName.substring(fileName.lastIndexOf("."));
+        } catch (StringIndexOutOfBoundsException exception) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"잘못된 파일 형식 ("+ fileName +")입니다.");
+        }
     }
 
 }
