@@ -37,6 +37,10 @@ public class SecurityConfig {
                 .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
 
                 .antMatchers(HttpMethod.POST,"/auth/oauth").permitAll()
+                .antMatchers(HttpMethod.POST,"/post/create").authenticated()
+                .antMatchers(HttpMethod.POST,"/likes/**").authenticated()
+                .antMatchers(HttpMethod.POST,"/unlikes/**").authenticated()
+
 
                 .anyRequest().denyAll()
                 .and()

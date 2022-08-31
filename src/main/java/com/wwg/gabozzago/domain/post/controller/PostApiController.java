@@ -24,13 +24,13 @@ public class PostApiController {
             postService.save(createPostRequestDto);
     }
 
-    @PostMapping("/{postId}/likes")
+    @PostMapping("/likes/{postId}")
     public ResponseEntity<?> likes(@PathVariable Long postId){
         likesService.likes(postId);
         return new ResponseEntity<>("좋아여 성공",HttpStatus.OK);
     }
 
-    @DeleteMapping("/{postId}/unlikes")
+    @DeleteMapping("/unlikes/{postId}")
     public ResponseEntity<?> unlikes(@PathVariable Long postId){
         likesService.unlikes(postId);
         return new ResponseEntity<>("좋아여 취소 성공",HttpStatus.OK);
