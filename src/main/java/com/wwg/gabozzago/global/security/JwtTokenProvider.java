@@ -61,4 +61,8 @@ public class JwtTokenProvider {
                 .setExpiration(new Date(System.currentTimeMillis()+exp*1000))
                 .compact();
     }
+    public String extractEmailFromRefreshToken(String token){
+        String refresh = token.replace("Bearer","");
+        return getTokenSubject(refresh, jwtProperties.getRefreshSecret());
+    }
 }

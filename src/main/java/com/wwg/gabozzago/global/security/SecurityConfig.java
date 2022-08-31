@@ -39,6 +39,7 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.POST,"/auth/oauth").permitAll()
                 .antMatchers(HttpMethod.POST,"/post/create").authenticated()
                 .antMatchers(HttpMethod.DELETE,"/post/delete/**").authenticated()
+                .antMatchers(HttpMethod.PUT,"/auth/refresh").permitAll()
                 .antMatchers(HttpMethod.POST,"/likes/**").authenticated()
                 .antMatchers(HttpMethod.DELETE,"/unlikes/**").authenticated()
 
