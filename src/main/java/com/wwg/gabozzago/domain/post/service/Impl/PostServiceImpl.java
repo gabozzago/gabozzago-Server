@@ -3,19 +3,19 @@ package com.wwg.gabozzago.domain.post.service.Impl;
 import com.wwg.gabozzago.domain.post.dto.CreatePostRequestDto;
 import com.wwg.gabozzago.domain.post.entity.Post;
 import com.wwg.gabozzago.domain.post.repository.PostRepository;
-import com.wwg.gabozzago.global.aws.service.AwsS3Service;
 import com.wwg.gabozzago.domain.post.service.PostService;
 import com.wwg.gabozzago.global.user.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.processing.FilerException;
 import javax.transaction.Transactional;
 
 @Service
 @RequiredArgsConstructor
 public class PostServiceImpl implements PostService {
     private final PostRepository postRepository;
-    private final AwsS3Service awsS3Service;
-    //게시물 생성
     @Override
     @Transactional
     public void save(CreatePostRequestDto createPostRequestDto){
