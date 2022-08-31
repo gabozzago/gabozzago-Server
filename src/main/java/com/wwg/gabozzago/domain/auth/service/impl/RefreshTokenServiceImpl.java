@@ -1,8 +1,8 @@
 package com.wwg.gabozzago.domain.auth.service.impl;
 
-import antlr.Token;
-import com.wwg.gabozzago.domain.auth.data.response.TokenResponse;
+import com.wwg.gabozzago.domain.auth.data.dto.TokenDto;
 import com.wwg.gabozzago.domain.auth.service.RefreshTokenService;
+import com.wwg.gabozzago.domain.auth.utils.AuthUtils;
 import com.wwg.gabozzago.domain.user.entity.User;
 import com.wwg.gabozzago.global.security.JwtTokenProvider;
 import com.wwg.gabozzago.global.security.exception.InvalidTokenException;
@@ -15,25 +15,12 @@ import org.springframework.stereotype.Service;
 public class RefreshTokenServiceImpl implements RefreshTokenService {
     private final JwtTokenProvider jwtTokenProvider;
     private final userUtils userUtils;
-
-
+    private final AuthUtils authUtils;
     @Override
-    public TokenResponse refresh(String refreshToken) {
+    public TokenDto refresh(String refreshToken) {
         String email = jwtTokenProvider.extractEmailFromRefreshToken(refreshToken);
         User user = userUtils.getUserByEmail(email);
         if(!refreshToken.equals(user.getRefreshToken())) throw new InvalidTokenException();
-        return getTokenResponseByRefreshToken(email,user);
-    }
-    private TokenResponse getTokenResponse(String email, User user){
-        String access = jwtTokenProvider.generateAccessToken(email);
-        String refresh = jwtTokenProvider.generateRefreshToken(email);
-        Integer accessExp = 60 * 15;
-        Integer refreshExp = 60 * 60 * 24 * 7;
-        user.updateRefreshToken(refresh);
-
-        return new TokenResponse(access,refresh,accessExp,refreshExp);
-    }
-    private TokenResponse getTokenResponseByRefreshToken(String email, User user){
-        return getTokenResponse(email,user);
+        return authUtils.generateTokenResponse(email);
     }
 }

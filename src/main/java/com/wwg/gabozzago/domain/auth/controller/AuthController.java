@@ -1,6 +1,7 @@
 package com.wwg.gabozzago.domain.auth.controller;
 
 import com.wwg.gabozzago.domain.auth.data.dto.LoginDto;
+import com.wwg.gabozzago.domain.auth.data.dto.TokenDto;
 import com.wwg.gabozzago.domain.auth.data.request.LoginRequest;
 import com.wwg.gabozzago.domain.auth.data.response.LoginResponse;
 import com.wwg.gabozzago.domain.auth.data.response.TokenResponse;
@@ -29,7 +30,8 @@ public class AuthController {
 
     @PutMapping("/refresh")
     public ResponseEntity<TokenResponse>refresh(@RequestHeader("Refresh-Token") String refreshToken){
-        TokenResponse tokenResponse = refreshTokenService.refresh(refreshToken);
+        TokenDto tokenDto = refreshTokenService.refresh(refreshToken);
+        TokenResponse tokenResponse = authConverter.toTokenResponse(tokenDto);
         return new ResponseEntity<>(tokenResponse,HttpStatus.OK);
     }
 
