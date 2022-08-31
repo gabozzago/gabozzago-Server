@@ -6,10 +6,7 @@ import com.wwg.gabozzago.domain.post.repository.PostRepository;
 import com.wwg.gabozzago.domain.post.service.PostService;
 import com.wwg.gabozzago.global.user.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.processing.FilerException;
 import javax.transaction.Transactional;
 
 @Service
