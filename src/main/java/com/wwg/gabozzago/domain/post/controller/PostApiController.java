@@ -8,11 +8,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.processing.FilerException;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/post")
+@RequestMapping("/post") //TODO 지인호 | /api/v1/post 로 rename 하는게 좋아보여요. (하위호환성을 위한 버저닝 처리)
 public class PostApiController {
     private final PostService postService;
     //게시물 생성

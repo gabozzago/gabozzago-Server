@@ -1,4 +1,4 @@
-package com.wwg.gabozzago.domain.post.service;
+package com.wwg.gabozzago.global.aws.service;
 
 import org.springframework.web.multipart.MultipartFile;
 

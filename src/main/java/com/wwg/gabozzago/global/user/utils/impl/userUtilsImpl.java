@@ -9,7 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor
+@RequiredArgsConstructor //TODO 지인호 | Java에서는 Class 이름을 Camel Case 로 작명하는것을 권장하고있어요. "UserUtilsImpl" 은 어떠신가요??
 public class userUtilsImpl implements userUtils {
     private final UserRepository userRepository;
 
