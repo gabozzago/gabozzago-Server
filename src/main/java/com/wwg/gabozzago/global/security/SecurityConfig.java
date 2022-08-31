@@ -39,7 +39,7 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.POST,"/auth/oauth").permitAll()
                 .antMatchers(HttpMethod.POST,"/post/create").authenticated()
                 .antMatchers(HttpMethod.DELETE,"/post/delete/**").authenticated()
-                .antMatchers(HttpMethod.POST,"/auth/refresh").permitAll()
+                .antMatchers(HttpMethod.PUT,"/auth/refresh").permitAll()
 
                 .anyRequest().denyAll()
                 .and()
