@@ -51,6 +51,7 @@ public class AwsS3ServiceImpl implements AwsS3Service {
     private String createFileName(String fileName) {
         return UUID.randomUUID().toString().concat(getFileExtension(fileName));
     }
+    @Override
     public void deleteImage(String fileName) {
         amazonS3.deleteObject(new DeleteObjectRequest(bucket, fileName));
     }
