@@ -35,6 +35,6 @@ public class LikesServiceImpl implements LikesService {
         User user = userUtils.getCurrentUser();
         Post post = postRepository.findById(postId).orElseThrow(PostNotFoundException::new);
         Likes likes = new Likes(user,post);
-        likesRepository.delete(likes);
+        likesRepository.deleteById(likes.getPost().getId());
     }
 }
