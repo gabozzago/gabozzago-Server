@@ -1,4 +1,4 @@
-package com.wwg.gabozzago.domain.post.dto;
+package com.wwg.gabozzago.domain.post.data.request;
 
 import com.wwg.gabozzago.domain.post.entity.Post;
 import lombok.*;
