@@ -1,4 +1,4 @@
-package com.wwg.gabozzago.domain.likes.entity;
+package com.wwg.gabozzago.domain.post.entity;
 
 import com.wwg.gabozzago.domain.post.entity.Post;
 import com.wwg.gabozzago.domain.user.entity.User;
@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
@@ -18,9 +20,11 @@ public class Likes {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne()
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne()
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Post post;
 
     public Likes(User user, Post post){

@@ -1,9 +1,11 @@
 package com.wwg.gabozzago.domain.post.controller;
 
 
-import com.wwg.gabozzago.domain.likes.service.LikesService;
+import com.wwg.gabozzago.domain.post.service.LikesService;
 import com.wwg.gabozzago.domain.post.data.request.CreatePostRequestDto;
 import com.wwg.gabozzago.domain.post.service.PostService;
+import com.wwg.gabozzago.domain.user.entity.User;
+import com.wwg.gabozzago.global.user.utils.UserUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 public class PostApiController {
     private final PostService postService;
     private final LikesService likesService;
+    private final UserUtils userUtils;
     //게시물 생성
     @PostMapping("/create")
     public ResponseEntity<Void> save(@RequestBody CreatePostRequestDto createPostRequestDto){
@@ -30,9 +33,15 @@ public class PostApiController {
 
     //좋아요
     @PostMapping("/likes/{postId}")
-    public ResponseEntity<?> likes(@PathVariable Long postId){
-        likesService.likes(postId);
-        return  new ResponseEntity<>("좋아여 성공",HttpStatus.OK);
+    public ResponseEntity<?> addLike(@PathVariable Long postId){
+        User user = userUtils.getCurrentUser();
+        boolean result = false;
+
+        if (user != null){
+            result = likesService.addLike(postId);
+        }
+        return result ?
+                new ResponseEntity<>("좋아요 성공",HttpStatus.OK) : new ResponseEntity<>("좋아요 중복으로 인한 실패!!",HttpStatus.BAD_REQUEST);
     }
 
     @DeleteMapping("/unlikes/{postId}")

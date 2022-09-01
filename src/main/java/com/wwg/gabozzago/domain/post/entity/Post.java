@@ -2,11 +2,12 @@ package com.wwg.gabozzago.domain.post.entity;
 
 import com.wwg.gabozzago.domain.comment.entity.Comment;
 import com.wwg.gabozzago.domain.user.entity.User;
-import com.wwg.gabozzago.domain.likes.entity.Likes;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.List;
@@ -35,12 +36,12 @@ public class Post {
     @Column(name = "likes_state")
     private boolean likesState;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne()
+    @OnDelete( action = OnDeleteAction.CASCADE)
     private User user;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
     private List<Likes> likesList;
-
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
     private List<Comment> commentList;

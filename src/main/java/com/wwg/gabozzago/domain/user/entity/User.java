@@ -2,6 +2,8 @@ package com.wwg.gabozzago.domain.user.entity;
 
 import com.wwg.gabozzago.domain.post.entity.Post;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
@@ -25,7 +27,8 @@ public class User {
     @Column(name = "refresh_token")
     private String refreshToken;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "user")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Post> postList;
 
     public void updateRefreshToken(String refreshToken){
