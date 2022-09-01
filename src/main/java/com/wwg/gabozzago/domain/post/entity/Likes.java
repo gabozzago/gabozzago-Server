@@ -28,4 +28,8 @@ public class Likes {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Post post;
 
+    public Likes(User user, Post post) {
+        this.user = user;
+        this.post = post;
+    }
 }
