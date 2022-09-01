@@ -23,6 +23,10 @@ public class Likes {
     @ManyToOne(cascade = CascadeType.REMOVE)
     private Post post;
 
+    public Likes(User user, Post post){
+        this.user = user;
+        this.post = post;
+    }
 
 
 }

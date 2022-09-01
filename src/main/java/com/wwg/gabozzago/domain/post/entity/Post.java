@@ -27,6 +27,14 @@ public class Post {
     @Column(name = "content")
     private String content;
 
+    @Transient
+    @Column(name = "likes_count")
+    private long likesCount;
+
+    @Transient
+    @Column(name = "likes_state")
+    private boolean likesState;
+
     @ManyToOne(cascade = CascadeType.REMOVE)
     private User user;
 

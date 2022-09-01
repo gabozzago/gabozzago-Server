@@ -41,6 +41,8 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.DELETE,"/post/delete/**").authenticated()
                 .antMatchers(HttpMethod.PUT,"/auth/refresh").permitAll()
                 .antMatchers(HttpMethod.GET,"/user/mypage").authenticated()
+                .antMatchers(HttpMethod.POST,"/post/likes/**").authenticated()
+                .antMatchers(HttpMethod.DELETE,"/post/unlikes/**").authenticated()
 
                 .anyRequest().denyAll()
                 .and()

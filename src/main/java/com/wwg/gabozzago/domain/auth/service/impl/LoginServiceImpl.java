@@ -11,6 +11,7 @@ import com.wwg.gabozzago.domain.user.repository.UserRepository;
 import com.wwg.gabozzago.global.security.exception.InvalidTokenException;
 import com.wwg.gabozzago.global.user.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -23,7 +24,8 @@ public class LoginServiceImpl implements LoginService {
     private final AuthUtils authUtils;
     @Override
     public LoginDto login(LoginRequest loginRequest){
-        Integer status;
+
+        HttpStatus status;
         try {
             GoogleIdToken idToken = authUtils.generateIdToken(loginRequest.getIdToken());
             if (idToken == null)
@@ -36,9 +38,9 @@ public class LoginServiceImpl implements LoginService {
             if (userRepository.existsUserByEmail(email)) {
                 User user = userRepository.findUserByEmail(email).orElseThrow(UserNotFoundException::new);
                 user.updateRefreshToken(tokenResponse.getRefreshToken());
-                status = 200;
+                status = HttpStatus.OK;
             } else { //유저가 존재하지 않을때
-                status = 201;
+                status = HttpStatus.CREATED;
                 User user = new User(email, tokenResponse.getRefreshToken());
                 userRepository.save(user);
             }

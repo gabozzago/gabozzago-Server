@@ -1,10 +1,13 @@
 package com.wwg.gabozzago.domain.likes.service.Impl;
 
+import com.wwg.gabozzago.domain.likes.entity.Likes;
 import com.wwg.gabozzago.domain.likes.service.LikesService;
+import com.wwg.gabozzago.domain.post.Exception.PostNotFoundException;
+import com.wwg.gabozzago.domain.post.entity.Post;
+import com.wwg.gabozzago.domain.post.repository.PostRepository;
 import com.wwg.gabozzago.domain.user.entity.User;
 import com.wwg.gabozzago.domain.likes.repository.LikesRepository;
-import com.wwg.gabozzago.domain.user.repository.UserRepository;
-import com.wwg.gabozzago.global.user.exception.UserNotFoundException;
+import com.wwg.gabozzago.global.user.utils.UserUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,19 +17,25 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class LikesServiceImpl implements LikesService {
     private final LikesRepository likesRepository;
-    private final UserRepository userRepository;
+    private final UserUtils userUtils;
+    private final PostRepository postRepository;
 
     @Transactional
     @Override
-    public void likes(Long postId, String Email) {
-        User user = userRepository.findUserByEmail(Email).orElseThrow(UserNotFoundException::new);
-        likesRepository.likes(postId, user.getEmail());
+    public void likes(Long postId) {
+        User user = userUtils.getCurrentUser();
+        Post post = postRepository.findById(postId).orElseThrow(PostNotFoundException::new);
+        Likes likes = new Likes(user,post);
+        likesRepository.save(likes);
+
     }
 
     @Transactional
     @Override
-    public void unlikes(Long postId, String Email){
-        User user = userRepository.findUserByEmail(Email).orElseThrow(UserNotFoundException::new);
-        likesRepository.unlikes(postId, user.getEmail());
+    public void unlikes(Long postId){
+        User user = userUtils.getCurrentUser();
+        Post post = postRepository.findById(postId).orElseThrow(PostNotFoundException::new);
+        Likes likes = new Likes(user,post);
+        likesRepository.deleteById(likes.getPost().getId());
     }
 }
