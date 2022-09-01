@@ -13,17 +13,17 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.ArrayList;
 import java.util.List;
 
-@RequiredArgsConstructor
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/image")
 
-public class ImageResourcesController {
+public class ImageUploadController {
     private final AwsS3Service awsS3Service;
 
     @PostMapping
-    public ResponseEntity<UploadImageResponse> uploadImage(@RequestParam("image") MultipartFile image) {
+    public ResponseEntity<UploadImageResponse> uploadImage(@RequestParam("image") MultipartFile multipartFile) {
         List<MultipartFile> images = new ArrayList<>();
-        images.add(image);
+        images.add(multipartFile);
         List<String> imageNames = awsS3Service.uploadImage(images);
         return ResponseEntity.ok(new UploadImageResponse(imageNames));
     }

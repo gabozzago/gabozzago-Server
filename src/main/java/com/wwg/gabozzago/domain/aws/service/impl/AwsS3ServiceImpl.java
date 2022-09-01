@@ -58,9 +58,10 @@ public class AwsS3ServiceImpl implements AwsS3Service {
     private String getFileExtension(String fileName) {
         try {
             return fileName.substring(fileName.lastIndexOf("."));
+
+            //amazonS3.getUrl(bucket,fileName).toString();
         } catch (StringIndexOutOfBoundsException exception) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"잘못된 파일 형식 ("+ fileName +")입니다.");
         }
     }
-
 }
