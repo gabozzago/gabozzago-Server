@@ -13,7 +13,8 @@ public enum ErrorCode {
     INVALID_TOKEN_EXCEPTION(401,"Invalid Token"),
     USER_NOT_FOUND(404,"User Not Fount"),
 
-    UNKNOWN_ERROR(500,"Unknown Error");
+    UNKNOWN_ERROR(500,"Unknown Error"),
+    POST_NOT_FOUND(404,"Post Not Found");
 
     private final int status;
     private final String message;

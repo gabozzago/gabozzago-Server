@@ -25,7 +25,7 @@ public class AuthController {
         LoginDto loginDto = loginService.login(loginRequest);
         LoginResponse loginResponse = authConverter.toLoginResponse(loginDto);
         TokenResponse tokenResponse = new TokenResponse(loginResponse.getTokenResponse());
-        return new ResponseEntity(tokenResponse, HttpStatus.valueOf(loginResponse.getStatus()));
+        return new ResponseEntity(tokenResponse,loginResponse.getStatus());
     }
 
     @PutMapping("/refresh")
