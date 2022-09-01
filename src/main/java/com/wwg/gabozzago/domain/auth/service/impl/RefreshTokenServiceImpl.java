@@ -6,7 +6,7 @@ import com.wwg.gabozzago.domain.auth.utils.AuthUtils;
 import com.wwg.gabozzago.domain.user.entity.User;
 import com.wwg.gabozzago.global.security.JwtTokenProvider;
 import com.wwg.gabozzago.global.security.exception.InvalidTokenException;
-import com.wwg.gabozzago.global.user.utils.userUtils;
+import com.wwg.gabozzago.global.user.utils.UserUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class RefreshTokenServiceImpl implements RefreshTokenService {
     private final JwtTokenProvider jwtTokenProvider;
-    private final userUtils userUtils;
+    private final UserUtils userUtils;
     private final AuthUtils authUtils;
     @Override
     public TokenDto refresh(String refreshToken) {
