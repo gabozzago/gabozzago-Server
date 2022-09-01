@@ -1,5 +1,6 @@
 package com.wwg.gabozzago.domain.post.service.Impl;
 
+import com.wwg.gabozzago.domain.post.entity.Likes;
 import com.wwg.gabozzago.domain.post.exception.PostNotFoundException;
 import com.wwg.gabozzago.domain.post.service.LikesService;
 import com.wwg.gabozzago.domain.post.entity.Post;
@@ -26,7 +27,7 @@ public class LikesServiceImpl implements LikesService {
 
         // 중복 좋아요 방지
         if(isNotAlreadyLike(post)) {
-            likesRepository.findByPostAndUser(post,user);
+            likesRepository.save(new Likes(user, post));
             return true;
         }
         return false;
