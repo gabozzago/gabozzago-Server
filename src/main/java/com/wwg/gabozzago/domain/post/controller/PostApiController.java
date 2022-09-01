@@ -1,8 +1,8 @@
 package com.wwg.gabozzago.domain.post.controller;
 
 
-import com.wwg.gabozzago.domain.post.service.LikesService;
 import com.wwg.gabozzago.domain.post.data.request.CreatePostRequestDto;
+import com.wwg.gabozzago.domain.post.service.LikesService;
 import com.wwg.gabozzago.domain.post.service.PostService;
 import com.wwg.gabozzago.domain.user.entity.User;
 import com.wwg.gabozzago.global.user.utils.UserUtils;
@@ -21,14 +21,14 @@ public class PostApiController {
     //게시물 생성
     @PostMapping("/create")
     public ResponseEntity<Void> save(@RequestBody CreatePostRequestDto createPostRequestDto){
-        postService.save(createPostRequestDto);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+            postService.save(createPostRequestDto);
+            return new ResponseEntity<>(HttpStatus.CREATED);
     }
     //게시물 삭제
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void>delete(@PathVariable Long id){
-        postService.delete(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        public ResponseEntity<Void>delete(@PathVariable Long id){
+             postService.delete(id);
+             return new ResponseEntity<>(HttpStatus.OK);
     }
 
     //좋아요

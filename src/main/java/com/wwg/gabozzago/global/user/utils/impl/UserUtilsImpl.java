@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class /* userUtilsImpl */ UserUtilsImpl implements UserUtils {
+public class UserUtilsImpl implements UserUtils {
     private final UserRepository userRepository;
 
     @Override

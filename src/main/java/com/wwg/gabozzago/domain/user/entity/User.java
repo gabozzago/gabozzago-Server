@@ -28,7 +28,6 @@ public class User {
     private String refreshToken;
 
     @OneToMany(mappedBy = "user")
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Post> postList;
 
     public void updateRefreshToken(String refreshToken){

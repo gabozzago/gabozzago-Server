@@ -1,8 +1,7 @@
 package com.wwg.gabozzago.domain.post.service.Impl;
 
-import com.wwg.gabozzago.domain.post.entity.Likes;
+import com.wwg.gabozzago.domain.post.exception.PostNotFoundException;
 import com.wwg.gabozzago.domain.post.service.LikesService;
-import com.wwg.gabozzago.domain.post.Exception.PostNotFoundException;
 import com.wwg.gabozzago.domain.post.entity.Post;
 import com.wwg.gabozzago.domain.post.repository.PostRepository;
 import com.wwg.gabozzago.domain.user.entity.User;
@@ -11,7 +10,6 @@ import com.wwg.gabozzago.global.user.utils.UserUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 
 @RequiredArgsConstructor
 @Service
@@ -28,7 +26,7 @@ public class LikesServiceImpl implements LikesService {
 
         // 중복 좋아요 방지
         if(isNotAlreadyLike(post)) {
-            likesRepository.save(new Likes(user, post));
+            likesRepository.findByPostAndUser(post,user);
             return true;
         }
         return false;
