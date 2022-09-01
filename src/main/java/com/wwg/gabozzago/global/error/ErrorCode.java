@@ -1,4 +1,4 @@
-package com.wwg.gabozzago.global.error.exception;
+package com.wwg.gabozzago.global.error;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;

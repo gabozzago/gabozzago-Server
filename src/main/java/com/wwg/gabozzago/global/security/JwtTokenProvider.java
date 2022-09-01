@@ -1,8 +1,9 @@
 package com.wwg.gabozzago.global.security;
 
+import com.wwg.gabozzago.global.error.ErrorCode;
+import com.wwg.gabozzago.global.error.exception.ExpiredTokenException;
+import com.wwg.gabozzago.global.error.exception.InvalidTokenException;
 import com.wwg.gabozzago.global.security.auth.AuthDetailsService;
-import com.wwg.gabozzago.global.security.exception.ExpiredTokenException;
-import com.wwg.gabozzago.global.security.exception.InvalidTokenException;
 import com.wwg.gabozzago.global.security.properties.JwtProperties;
 import io.jsonwebtoken.*;
 import lombok.RequiredArgsConstructor;
@@ -44,9 +45,9 @@ public class JwtTokenProvider {
                     .parseClaimsJws(token)
                     .getBody();
         }catch(ExpiredJwtException e){
-            throw new ExpiredTokenException();
+            throw new ExpiredTokenException(ErrorCode.EXPIRED_TOKEN_EXCEPTION);
         }catch(MalformedJwtException | SignatureException e){
-            throw new InvalidTokenException();
+            throw new InvalidTokenException(ErrorCode.INVALID_TOKEN_EXCEPTION);
         }
     }
     private String getTokenSubject(String token,String secret){

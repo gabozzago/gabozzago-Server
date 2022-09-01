@@ -2,8 +2,7 @@ package com.wwg.gabozzago.global.security.exception.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wwg.gabozzago.global.error.ErrorResponse;
-import com.wwg.gabozzago.global.error.exception.ErrorCode;
-import com.wwg.gabozzago.global.error.exception.GlobalException;
+import com.wwg.gabozzago.global.error.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -20,13 +19,13 @@ public class JwtExceptionHandler extends OncePerRequestFilter {
     private final ObjectMapper objectMapper;
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
-                                    FilterChain filterChain)
-                                    throws ServletException, IOException {
+                                    FilterChain filterChain){
         try{
             filterChain.doFilter(request,response);
-        }catch(GlobalException e){
-            e.printStackTrace();
-
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ServletException e) {
+            throw new RuntimeException(e);
         }
     }
     private void responseError(HttpServletResponse response, ErrorCode errorCode) throws IOException {

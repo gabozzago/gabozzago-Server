@@ -1,7 +1,9 @@
-package com.wwg.gabozzago.global.error;
+package com.wwg.gabozzago.global.error.handler;
 
-import com.wwg.gabozzago.global.error.exception.ErrorCode;
-import com.wwg.gabozzago.global.error.exception.GlobalException;
+import com.wwg.gabozzago.global.error.ErrorCode;
+import com.wwg.gabozzago.global.error.ErrorResponse;
+import com.wwg.gabozzago.global.error.exception.ExpiredTokenException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
@@ -9,19 +11,19 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import javax.validation.ConstraintDeclarationException;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import java.util.HashMap;
 import java.util.Map;
 
+@Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
-    @ExceptionHandler(GlobalException.class)
-    public ResponseEntity<ErrorResponse>handleGlobalException(GlobalException e){
-        ErrorCode errorCode = e.getErrorCode();
-        return new ResponseEntity<>(new ErrorResponse(errorCode.getStatus(),errorCode.getMessage()),
-                                    HttpStatus.valueOf(errorCode.getStatus()));
+    @ExceptionHandler(ExpiredTokenException.class)
+    public ResponseEntity<ErrorResponse> ExpiredTokenException(HttpServletRequest request,ExpiredTokenException e){
+        ErrorResponse errorResponse = new ErrorResponse(e.getErrorCode());
+        return new ResponseEntity<>(errorResponse, HttpStatus.valueOf(errorResponse.getStatus()));
     }
     @ExceptionHandler(BindException.class)
     public ResponseEntity<?>BindException(BindException e){
@@ -41,5 +43,7 @@ public class GlobalExceptionHandler {
         }
         return new ResponseEntity<>(errorMap,HttpStatus.BAD_REQUEST);
     }
-
+    public void printException(HttpServletRequest request, ErrorCode errorCode){
+        log.error("URL:"+request.getRequestURI()+"errorCode:"+errorCode);
+    }
 }
