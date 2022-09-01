@@ -1,8 +1,9 @@
-package com.wwg.gabozzago.global.user.utils.impl;
+package com.wwg.gabozzago.domain.user.utils.impl;
 
 import com.wwg.gabozzago.domain.user.entity.User;
 import com.wwg.gabozzago.domain.user.repository.UserRepository;
-import com.wwg.gabozzago.global.user.exception.UserNotFoundException;
+import com.wwg.gabozzago.global.error.ErrorCode;
+import com.wwg.gabozzago.global.error.exception.UserNotFoundException;
 import com.wwg.gabozzago.global.user.utils.UserUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,6 +22,6 @@ public class UserUtilsImpl implements UserUtils {
 
     @Override
     public User getUserByEmail(String email) {
-        return userRepository.findUserByEmail(email).orElseThrow(UserNotFoundException::new);
+        return userRepository.findUserByEmail(email).orElseThrow(()->new UserNotFoundException(ErrorCode.USER_NOT_FOUND));
     }
 }

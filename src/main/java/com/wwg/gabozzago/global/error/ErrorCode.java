@@ -1,4 +1,4 @@
-package com.wwg.gabozzago.global.error.exception;
+package com.wwg.gabozzago.global.error;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
@@ -14,7 +14,7 @@ public enum ErrorCode {
     USER_NOT_FOUND(404,"User Not Fount"),
 
     UNKNOWN_ERROR(500,"Unknown Error"),
-    Post_Not_Found(404,"Post Not Found");
+    POST_NOT_FOUND(404,"Post Not Found");
 
     private final int status;
     private final String message;

@@ -8,8 +8,9 @@ import com.wwg.gabozzago.domain.auth.service.LoginService;
 import com.wwg.gabozzago.domain.auth.utils.AuthUtils;
 import com.wwg.gabozzago.domain.user.entity.User;
 import com.wwg.gabozzago.domain.user.repository.UserRepository;
-import com.wwg.gabozzago.global.security.exception.InvalidTokenException;
-import com.wwg.gabozzago.global.user.exception.UserNotFoundException;
+import com.wwg.gabozzago.global.error.ErrorCode;
+import com.wwg.gabozzago.global.error.exception.InvalidTokenException;
+import com.wwg.gabozzago.global.error.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -29,14 +30,14 @@ public class LoginServiceImpl implements LoginService {
         try {
             GoogleIdToken idToken = authUtils.generateIdToken(loginRequest.getIdToken());
             if (idToken == null)
-                throw new InvalidTokenException();
+                throw new InvalidTokenException(ErrorCode.INVALID_TOKEN_EXCEPTION);
             //토큰 생성
             String email = idToken.getPayload().getEmail();
             TokenDto tokenResponse = authUtils.generateTokenResponse(email);
 
             //유저가 존재할때
             if (userRepository.existsUserByEmail(email)) {
-                User user = userRepository.findUserByEmail(email).orElseThrow(UserNotFoundException::new);
+                User user = userRepository.findUserByEmail(email).orElseThrow(()->new UserNotFoundException(ErrorCode.USER_NOT_FOUND));
                 user.updateRefreshToken(tokenResponse.getRefreshToken());
                 status = HttpStatus.OK;
             } else { //유저가 존재하지 않을때

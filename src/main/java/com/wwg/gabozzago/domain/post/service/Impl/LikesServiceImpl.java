@@ -1,12 +1,14 @@
 package com.wwg.gabozzago.domain.post.service.Impl;
 
 import com.wwg.gabozzago.domain.post.entity.Likes;
-import com.wwg.gabozzago.domain.post.exception.PostNotFoundException;
 import com.wwg.gabozzago.domain.post.service.LikesService;
 import com.wwg.gabozzago.domain.post.entity.Post;
-import com.wwg.gabozzago.domain.post.repository.PostRepository;
 import com.wwg.gabozzago.domain.user.entity.User;
 import com.wwg.gabozzago.domain.post.repository.LikesRepository;
+import com.wwg.gabozzago.global.error.ErrorCode;
+import com.wwg.gabozzago.global.error.exception.PostNotFoundException;
+import com.wwg.gabozzago.global.error.exception.UserNotFoundException;
+import com.wwg.gabozzago.global.post.repository.PostRepository;
 import com.wwg.gabozzago.global.user.utils.UserUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,7 +25,7 @@ public class LikesServiceImpl implements LikesService {
     @Override
     public boolean addLike(Long postId) {
         User user = userUtils.getCurrentUser();
-        Post post = postRepository.findById(postId).orElseThrow(PostNotFoundException::new);
+        Post post = postRepository.findById(postId).orElseThrow(()-> new UserNotFoundException(ErrorCode.USER_NOT_FOUND));
 
         // 중복 좋아요 방지
         if(isNotAlreadyLike(post)) {
@@ -43,7 +45,7 @@ public class LikesServiceImpl implements LikesService {
     @Override
     public void unlikes(Long postId){
         User user = userUtils.getCurrentUser();
-        Post post = postRepository.findById(postId).orElseThrow(PostNotFoundException::new);
+        Post post = postRepository.findById(postId).orElseThrow(()-> new PostNotFoundException(ErrorCode.POST_NOT_FOUND));
         likesRepository.deleteByPostAndUser(post, user);
     }
 }
