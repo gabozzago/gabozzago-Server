@@ -2,7 +2,7 @@ package com.wwg.gabozzago.global.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wwg.gabozzago.global.error.ErrorResponse;
-import com.wwg.gabozzago.global.error.exception.ErrorCode;
+import com.wwg.gabozzago.global.error.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.AuthenticationException;
