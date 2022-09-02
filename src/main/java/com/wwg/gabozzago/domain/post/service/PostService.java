@@ -6,8 +6,4 @@ public interface PostService {
      //게시물 등록
      void save(CreatePostRequestDto createPostRequestDto);
      void delete(Long id);
-     //게시물 생성
-     void save(CreatePostRequestDto createPostRequestDto);
-     //게시물 삭제
-     void delete(Long id);
 }
