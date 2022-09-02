@@ -53,7 +53,7 @@ public class PostApiController {
     }
 
     //메인페이지
-    @GetMapping("/")
+    @GetMapping
     public ResponseEntity<MainPageResponse> getMainPage(){
         MainPageResponse mainPageList = postService.getMainPage();
         return new ResponseEntity<>(mainPageList,HttpStatus.OK);
