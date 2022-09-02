@@ -1,4 +1,4 @@
-package com.wwg.gabozzago.global.post.repository;
+package com.wwg.gabozzago.domain.post.repository;
 
 import com.wwg.gabozzago.domain.post.entity.Post;
 import com.wwg.gabozzago.domain.user.entity.User;

@@ -2,6 +2,7 @@ package com.wwg.gabozzago.domain.post.controller;
 
 
 import com.wwg.gabozzago.domain.post.data.request.CreatePostRequestDto;
+import com.wwg.gabozzago.domain.post.data.response.MainPageResponse;
 import com.wwg.gabozzago.domain.post.service.LikesService;
 import com.wwg.gabozzago.domain.post.service.PostService;
 import com.wwg.gabozzago.domain.user.entity.User;
@@ -44,9 +45,17 @@ public class PostApiController {
                 new ResponseEntity<>("좋아요 성공",HttpStatus.OK) : new ResponseEntity<>("좋아요 중복으로 인한 실패!!",HttpStatus.BAD_REQUEST);
     }
 
+    //좋아요 취소
     @DeleteMapping("/unlikes/{postId}")
     public ResponseEntity<?> unlikes(@PathVariable Long postId){
         likesService.unlikes(postId);
         return new ResponseEntity<>("좋아여 취소 성공",HttpStatus.OK);
+    }
+
+    //메인페이지
+    @GetMapping("/")
+    public ResponseEntity<MainPageResponse> getMainPage(){
+        MainPageResponse mainPageList = postService.getMainPage();
+        return new ResponseEntity<>(mainPageList,HttpStatus.OK);
     }
 }
