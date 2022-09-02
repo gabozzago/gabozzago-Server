@@ -27,8 +27,6 @@ import java.util.UUID;
 public class AwsS3ServiceImpl implements AwsS3Service {
     @Value("${cloud.aws.s3.bucket}")
     private String bucket;
-    @Value("${cloud.aws.s3.dir}")
-    private String dir;
     @Value("${cloud.aws.s3.url}")
     private String url;
 
