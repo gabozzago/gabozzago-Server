@@ -44,6 +44,7 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.POST,"/image").permitAll()
                 .antMatchers(HttpMethod.POST,"/post/likes/**").authenticated()
                 .antMatchers(HttpMethod.DELETE,"/post/unlikes/**").authenticated()
+                .antMatchers(HttpMethod.GET,"/post/").authenticated()
 
                 .anyRequest().denyAll()
                 .and()

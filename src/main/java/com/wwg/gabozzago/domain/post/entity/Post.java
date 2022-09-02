@@ -46,4 +46,7 @@ public class Post {
     @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
     private List<Comment> commentList;
 
+    public void updateLikeState(boolean likesState){
+        this.likesState = likesState;
+    }
 }
