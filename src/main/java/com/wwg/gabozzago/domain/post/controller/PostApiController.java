@@ -2,6 +2,7 @@ package com.wwg.gabozzago.domain.post.controller;
 
 
 import com.wwg.gabozzago.domain.post.data.request.CreatePostRequestDto;
+import com.wwg.gabozzago.domain.post.data.response.LikedPostListResponse;
 import com.wwg.gabozzago.domain.post.data.response.MainPageResponse;
 import com.wwg.gabozzago.domain.post.service.LikesService;
 import com.wwg.gabozzago.domain.post.service.PostService;
@@ -11,8 +12,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import javax.annotation.processing.FilerException;
 
 @RequiredArgsConstructor
 @RestController
@@ -59,5 +58,12 @@ public class PostApiController {
     public ResponseEntity<MainPageResponse> getMainPage(){
         MainPageResponse mainPageList = postService.getMainPage();
         return new ResponseEntity<>(mainPageList,HttpStatus.OK);
+    }
+
+    //좋아요 누른 게시물
+    @GetMapping("/likes")
+    public ResponseEntity<LikedPostListResponse> getLikedPostList(){
+        LikedPostListResponse likedPostList = postService.getLikedPostList();
+        return new ResponseEntity<>(likedPostList,HttpStatus.OK);
     }
 }
