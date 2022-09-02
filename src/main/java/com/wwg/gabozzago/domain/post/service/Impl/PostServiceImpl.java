@@ -15,7 +15,6 @@ import javax.transaction.Transactional;
 @RequiredArgsConstructor
 public class PostServiceImpl implements PostService {
     private final PostRepository postRepository;
-    //게시물 생성
     @Override
     @Transactional
     public void save(CreatePostRequestDto createPostRequestDto){
