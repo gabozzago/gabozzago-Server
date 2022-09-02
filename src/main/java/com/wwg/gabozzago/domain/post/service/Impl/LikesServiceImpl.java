@@ -41,6 +41,7 @@ public class LikesServiceImpl implements LikesService {
         return likesRepository.findByPostAndUser(post, user).isEmpty();
     }
 
+    //좋아요 취소
     @Transactional
     @Override
     public void unlikes(Long postId){

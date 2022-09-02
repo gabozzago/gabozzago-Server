@@ -26,6 +26,7 @@ public class PostServiceImpl implements PostService {
     private final PostRepository postRepository;
     private final UserUtils userUtils;
     private final LikesRepository likesRepository;
+    
     //게시물 생성
     @Override
     @Transactional
