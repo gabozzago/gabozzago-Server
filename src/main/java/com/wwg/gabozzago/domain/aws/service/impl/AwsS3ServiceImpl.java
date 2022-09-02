@@ -1,5 +1,8 @@
 package com.wwg.gabozzago.domain.aws.service.impl;
 
+import com.wwg.gabozzago.global.aws.service.AwsS3Service;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
@@ -24,30 +27,29 @@ import java.util.UUID;
 public class AwsS3ServiceImpl implements AwsS3Service {
     @Value("${cloud.aws.s3.bucket}")
     private String bucket;
+    @Value("${cloud.aws.s3.dir}")
+    private String dir;
+    @Value("${cloud.aws.s3.url}")
+    private String url;
+
 
     private final AmazonS3 amazonS3;
 
     @Override
-    public List<String> uploadImage(List<MultipartFile> multipartFile) {
-        List<String> fileNameList = new ArrayList<>();
-
-        multipartFile.forEach(file -> {
+    public String uploadImage(MultipartFile file) {
             String fileName = createFileName(file.getOriginalFilename());
             ObjectMetadata objectMetadata = new ObjectMetadata();
             objectMetadata.setContentLength(file.getSize());
             objectMetadata.setContentType(file.getContentType());
 
             try (InputStream inputStream = file.getInputStream()) {
-                amazonS3.putObject(new PutObjectRequest(bucket, fileName, inputStream, objectMetadata)
+                amazonS3.putObject(new PutObjectRequest(bucket,fileName, inputStream, objectMetadata)
                         .withCannedAcl(CannedAccessControlList.PublicRead));
             } catch (IOException exception) {
                 throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "이미지업로드 실패");
             }
-            fileNameList.add(fileName);
-        });
-        return fileNameList;
+        return url + fileName;
     }
-
     private String createFileName(String fileName) {
         return UUID.randomUUID().toString().concat(getFileExtension(fileName));
     }
@@ -57,11 +59,10 @@ public class AwsS3ServiceImpl implements AwsS3Service {
     }
     private String getFileExtension(String fileName) {
         try {
-            return fileName.substring(fileName.lastIndexOf("."));
-
-            //amazonS3.getUrl(bucket,fileName).toString();
+            return fileName.substring(fileName.lastIndexOf("." ));
         } catch (StringIndexOutOfBoundsException exception) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"잘못된 파일 형식 ("+ fileName +")입니다.");
         }
     }
 }
+
