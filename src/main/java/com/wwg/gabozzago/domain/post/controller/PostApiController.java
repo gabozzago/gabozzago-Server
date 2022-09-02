@@ -44,6 +44,7 @@ public class PostApiController {
                 new ResponseEntity<>("좋아요 성공",HttpStatus.OK) : new ResponseEntity<>("좋아요 중복으로 인한 실패!!",HttpStatus.BAD_REQUEST);
     }
 
+    //좋아요 취소
     @DeleteMapping("/unlikes/{postId}")
     public ResponseEntity<?> unlikes(@PathVariable Long postId){
         likesService.unlikes(postId);
