@@ -7,6 +7,7 @@ import com.wwg.gabozzago.domain.user.utils.UserConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,5 +24,10 @@ public class UserController {
         MyPageDto myPageDto = userService.getMyPage();
         MyPageResponse myPageResponse =userConverter.toMyPageResponse(myPageDto);
         return new ResponseEntity<>(myPageResponse,HttpStatus.OK);
+    }
+    @DeleteMapping("/withdrawal")
+    public ResponseEntity<Void> withdrawalUser(){
+        userService.withdrawalUser();
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

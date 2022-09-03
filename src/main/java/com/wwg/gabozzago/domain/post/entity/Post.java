@@ -1,6 +1,7 @@
 package com.wwg.gabozzago.domain.post.entity;
 
 import com.wwg.gabozzago.domain.comment.entity.Comment;
+import com.wwg.gabozzago.domain.image.entity.Img;
 import com.wwg.gabozzago.domain.user.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,7 +23,6 @@ public class Post {
     private Long id;
     private String title;
     private String location;
-    @Column(name = "post_img")
     private String postImg;
 
     @Column(name = "content")
@@ -40,10 +40,10 @@ public class Post {
     @OnDelete( action = OnDeleteAction.CASCADE)
     private User user;
 
-    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "post")
     private List<Likes> likesList;
 
-    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "post")
     private List<Comment> commentList;
 
 }

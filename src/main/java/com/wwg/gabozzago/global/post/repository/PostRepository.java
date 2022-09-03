@@ -12,4 +12,6 @@ import java.util.List;
 public interface PostRepository extends JpaRepository<Post, Long> {
     @Query("select p.postImg from Post p")
     List<String> getPostImg(User userInfo);
+
+    void deletePostsByUser(User userInfo);
 }
