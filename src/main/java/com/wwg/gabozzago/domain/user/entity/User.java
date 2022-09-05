@@ -27,9 +27,6 @@ public class User {
     @Column(name = "refresh_token")
     private String refreshToken;
 
-    @OneToMany(mappedBy = "user")
-    private List<Post> postList;
-
     public void updateRefreshToken(String refreshToken){
         this.refreshToken = refreshToken;
     }
