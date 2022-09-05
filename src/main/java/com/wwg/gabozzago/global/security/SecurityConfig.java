@@ -47,6 +47,7 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.DELETE,"/post/unlikes/**").authenticated()
                 .antMatchers(HttpMethod.GET,"/post/").authenticated()
                 .antMatchers(HttpMethod.GET,"/post/likes").authenticated()
+                .antMatchers(HttpMethod.PUT,"/auth/logout").authenticated()
 
                 .anyRequest().denyAll()
                 .and()
