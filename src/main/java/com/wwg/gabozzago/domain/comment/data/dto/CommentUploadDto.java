@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Getter
-public class CommentDto {
-    private final String comment;
+public class CommentUploadDto {
+    private final String content;
     private final Long postId;
 }
