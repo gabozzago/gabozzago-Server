@@ -10,7 +10,7 @@ import com.wwg.gabozzago.domain.post.repository.LikesRepository;
 import com.wwg.gabozzago.domain.user.entity.User;
 import com.wwg.gabozzago.global.error.ErrorCode;
 import com.wwg.gabozzago.global.error.exception.PostNotFoundException;
-import com.wwg.gabozzago.domain.post.repository.PostRepository;
+import com.wwg.gabozzago.domain.user.post.repository.PostRepository;
 import com.wwg.gabozzago.domain.post.service.PostService;
 import com.wwg.gabozzago.global.user.utils.UserUtils;
 import lombok.RequiredArgsConstructor;
