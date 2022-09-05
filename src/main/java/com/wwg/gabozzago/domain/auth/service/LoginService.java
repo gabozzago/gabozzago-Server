@@ -5,4 +5,6 @@ import com.wwg.gabozzago.domain.auth.data.request.LoginRequest;
 
 public interface LoginService {
     LoginDto login(LoginRequest loginRequest);
+
+    void logout();
 }
