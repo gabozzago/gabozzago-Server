@@ -1,13 +1,16 @@
 package com.wwg.gabozzago.domain.post.service.Impl;
 
 import com.wwg.gabozzago.domain.post.data.request.CreatePostRequestDto;
+import com.wwg.gabozzago.domain.post.data.response.LikedPostListResponse;
+import com.wwg.gabozzago.domain.post.data.response.LikedPostResponse;
 import com.wwg.gabozzago.domain.post.data.response.MainPageResponse;
 import com.wwg.gabozzago.domain.post.data.response.PostResponse;
 import com.wwg.gabozzago.domain.post.entity.Post;
+import com.wwg.gabozzago.domain.post.repository.LikesRepository;
 import com.wwg.gabozzago.domain.user.entity.User;
 import com.wwg.gabozzago.global.error.ErrorCode;
 import com.wwg.gabozzago.global.error.exception.PostNotFoundException;
-import com.wwg.gabozzago.global.post.repository.PostRepository;
+import com.wwg.gabozzago.domain.post.repository.PostRepository;
 import com.wwg.gabozzago.domain.post.service.PostService;
 import com.wwg.gabozzago.global.user.utils.UserUtils;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +26,7 @@ import java.util.Objects;
 public class PostServiceImpl implements PostService {
     private final PostRepository postRepository;
     private final UserUtils userUtils;
+    private final LikesRepository likesRepository;
     //게시물 생성
     @Override
     @Transactional
@@ -59,6 +63,28 @@ public class PostServiceImpl implements PostService {
             });
             list.add(new PostResponse(postId,title,address,postImg,post.isLikesState()));
        });
+        return list;
+    }
+
+    @Override
+    public LikedPostListResponse getLikedPostList(){
+        List<LikedPostResponse> likedPostResponseList = findAllLikedPostInfo();
+        return new LikedPostListResponse(likedPostResponseList);
+    }
+
+    private List<LikedPostResponse> findAllLikedPostInfo() {
+        List<LikedPostResponse> list = new ArrayList<>();
+        User currentUser = userUtils.getCurrentUser();
+        likesRepository.findAll().forEach(likes -> {
+            if(likes.getUser() == currentUser){
+                String userName = likes.getUser().getName();
+                String userImg = likes.getUser().getUserImg();
+                String title = likes.getPost().getTitle();
+                String location = likes.getPost().getLocation();
+                String postImg = likes.getPost().getPostImg();
+                list.add(new LikedPostResponse(userName,userImg,title,location,postImg,true));
+            }
+        });
         return list;
     }
 }
