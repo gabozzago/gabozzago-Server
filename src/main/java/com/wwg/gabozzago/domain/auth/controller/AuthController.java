@@ -35,4 +35,10 @@ public class AuthController {
         return new ResponseEntity<>(tokenResponse,HttpStatus.OK);
     }
 
+    @PutMapping("/logout")
+    public ResponseEntity<?> logout(){
+        loginService.logout();
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }

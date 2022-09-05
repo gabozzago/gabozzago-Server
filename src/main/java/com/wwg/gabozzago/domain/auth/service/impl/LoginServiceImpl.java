@@ -11,9 +11,11 @@ import com.wwg.gabozzago.domain.user.repository.UserRepository;
 import com.wwg.gabozzago.global.error.ErrorCode;
 import com.wwg.gabozzago.global.error.exception.InvalidTokenException;
 import com.wwg.gabozzago.global.error.exception.UserNotFoundException;
+import com.wwg.gabozzago.global.user.utils.UserUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -23,6 +25,7 @@ import java.security.GeneralSecurityException;
 public class LoginServiceImpl implements LoginService {
     private final UserRepository userRepository;
     private final AuthUtils authUtils;
+    private final UserUtils userUtils;
     @Override
     public LoginDto login(LoginRequest loginRequest){
 
@@ -51,5 +54,12 @@ public class LoginServiceImpl implements LoginService {
         } catch (UserNotFoundException | GeneralSecurityException | IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    // 로그아웃
+    @Override
+    @Transactional
+    public void logout(){
+        userUtils.getCurrentUser().updateRefreshToken(null);
     }
 }
