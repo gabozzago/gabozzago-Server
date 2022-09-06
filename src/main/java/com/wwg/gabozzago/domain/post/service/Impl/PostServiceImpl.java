@@ -34,10 +34,10 @@ public class PostServiceImpl implements PostService {
     }
     //게시물 수정
     @Override
-    public void update(Long id, PostUpdateResponse postUpdateResponse) {
+    public void update(Long id, PostUpdateResponse dto) {
         Post post = postRepository.findById(id).orElseThrow(() ->
                 new PostNotFoundException(ErrorCode.POST_NOT_FOUND));
-                postRepository.update(post);
+                post.update(dto.getContent(),dto.getTitle(),dto.getPostImg());
     }
 
     //게시물 삭제
