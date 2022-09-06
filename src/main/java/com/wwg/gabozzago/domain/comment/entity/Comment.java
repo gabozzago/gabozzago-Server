@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -22,12 +23,8 @@ public class Comment {
     private Long id;
     private String content;
     @Column(name = "create_date")
-    private LocalDateTime createDate;
-
-    @PrePersist
-    public void createDate() {
-        this.createDate = LocalDateTime.now();
-    }
+    @CreatedDate
+    private String createDate;
 
     @ManyToOne()
     @OnDelete(action = OnDeleteAction.CASCADE)
