@@ -5,7 +5,6 @@ import com.wwg.gabozzago.domain.post.data.response.*;
 import com.wwg.gabozzago.domain.post.entity.Post;
 import com.wwg.gabozzago.domain.post.repository.LikesRepository;
 import com.wwg.gabozzago.domain.user.entity.User;
-import com.wwg.gabozzago.global.aws.service.AwsS3Service;
 import com.wwg.gabozzago.global.error.ErrorCode;
 import com.wwg.gabozzago.global.error.exception.PostNotFoundException;
 import com.wwg.gabozzago.domain.user.post.repository.PostRepository;
