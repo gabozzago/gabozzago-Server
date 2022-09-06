@@ -35,6 +35,14 @@ public class PostServiceImpl implements PostService {
         Post post = createPostRequestDto.toEntity(userInfo);
         postRepository.save(post);
     }
+    //게시물 수정
+    @Override
+    public void update(Long id, CreatePostRequestDto createPostRequestDto) {
+        Post post = postRepository.findById(id).orElseThrow(() ->
+                new PostNotFoundException(ErrorCode.POST_NOT_FOUND));
+
+    }
+
     //게시물 삭제
     @Override
     public void delete(Long id) {
