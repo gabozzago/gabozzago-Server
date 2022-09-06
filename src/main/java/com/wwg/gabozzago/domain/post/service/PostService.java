@@ -8,6 +8,8 @@ public interface PostService {
      //게시물 등록
      void save(CreatePostRequestDto createPostRequestDto);
      void delete(Long id);
+
+     void update(Long id, CreatePostRequestDto createPostRequestDto);
      //메인페이지
      MainPageResponse getMainPage();
      //좋아요 누른 게시물
