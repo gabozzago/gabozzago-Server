@@ -1,13 +1,11 @@
 package com.wwg.gabozzago.domain.post.service.Impl;
 
 import com.wwg.gabozzago.domain.post.data.request.CreatePostRequestDto;
-import com.wwg.gabozzago.domain.post.data.response.LikedPostListResponse;
-import com.wwg.gabozzago.domain.post.data.response.LikedPostResponse;
-import com.wwg.gabozzago.domain.post.data.response.MainPageResponse;
-import com.wwg.gabozzago.domain.post.data.response.PostResponse;
+import com.wwg.gabozzago.domain.post.data.response.*;
 import com.wwg.gabozzago.domain.post.entity.Post;
 import com.wwg.gabozzago.domain.post.repository.LikesRepository;
 import com.wwg.gabozzago.domain.user.entity.User;
+import com.wwg.gabozzago.global.aws.service.AwsS3Service;
 import com.wwg.gabozzago.global.error.ErrorCode;
 import com.wwg.gabozzago.global.error.exception.PostNotFoundException;
 import com.wwg.gabozzago.domain.user.post.repository.PostRepository;
@@ -37,10 +35,10 @@ public class PostServiceImpl implements PostService {
     }
     //게시물 수정
     @Override
-    public void update(Long id, CreatePostRequestDto createPostRequestDto) {
+    public void update(Long id, PostUpdateResponse postUpdateResponse) {
         Post post = postRepository.findById(id).orElseThrow(() ->
                 new PostNotFoundException(ErrorCode.POST_NOT_FOUND));
-
+                postRepository.update(post);
     }
 
     //게시물 삭제
@@ -48,8 +46,7 @@ public class PostServiceImpl implements PostService {
     public void delete(Long id) {
         Post post = postRepository.findById(id).orElseThrow(()->new
                 PostNotFoundException(ErrorCode.POST_NOT_FOUND));
-        postRepository.delete(post);
-
+            postRepository.delete(post);
     }
 
     //메인 페이지
