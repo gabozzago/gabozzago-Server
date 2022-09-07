@@ -14,7 +14,7 @@ public class CommentApiController {
     private final CommentService commentService;
 
     // 댓글 생성
-    @PostMapping("/{id}")
+    @PostMapping("/{postId}")
     public ResponseEntity<?> addComment(@PathVariable Long postId, @RequestBody CommentRequestDto commentRequestDto){
         return new ResponseEntity<>(commentService.addComment(postId,commentRequestDto),HttpStatus.CREATED);
     }
