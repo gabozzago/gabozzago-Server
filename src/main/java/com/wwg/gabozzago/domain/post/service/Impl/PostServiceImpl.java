@@ -1,5 +1,8 @@
 package com.wwg.gabozzago.domain.post.service.Impl;
 
+import com.wwg.gabozzago.domain.comment.data.dto.DetailPageCommentDto;
+import com.wwg.gabozzago.domain.comment.entity.Comment;
+import com.wwg.gabozzago.domain.comment.repository.CommentRepository;
 import com.wwg.gabozzago.domain.post.data.request.CreatePostRequestDto;
 import com.wwg.gabozzago.domain.post.data.response.LikedPostListResponse;
 import com.wwg.gabozzago.domain.post.data.response.LikedPostResponse;
@@ -10,7 +13,7 @@ import com.wwg.gabozzago.domain.post.repository.LikesRepository;
 import com.wwg.gabozzago.domain.user.entity.User;
 import com.wwg.gabozzago.global.error.ErrorCode;
 import com.wwg.gabozzago.global.error.exception.PostNotFoundException;
-import com.wwg.gabozzago.domain.user.post.repository.PostRepository;
+import com.wwg.gabozzago.domain.post.repository.PostRepository;
 import com.wwg.gabozzago.domain.post.service.PostService;
 import com.wwg.gabozzago.global.user.utils.UserUtils;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +30,7 @@ public class PostServiceImpl implements PostService {
     private final PostRepository postRepository;
     private final UserUtils userUtils;
     private final LikesRepository likesRepository;
+    private final CommentRepository commentRepository;
     //게시물 생성
     @Override
     @Transactional
@@ -70,6 +74,13 @@ public class PostServiceImpl implements PostService {
     public LikedPostListResponse getLikedPostList(){
         List<LikedPostResponse> likedPostResponseList = findAllLikedPostInfo();
         return new LikedPostListResponse(likedPostResponseList);
+    }
+
+    @Override
+    public DetailPageCommentDto getDetailPage(Long id) {
+        Post postInfo = postRepository.findById(id).orElseThrow(()->new PostNotFoundException(ErrorCode.POST_NOT_FOUND));
+        Comment commentInfo = commentRepository.findCommentsByPostInfo(postInfo);
+        return null;
     }
 
     private List<LikedPostResponse> findAllLikedPostInfo() {

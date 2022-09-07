@@ -1,6 +1,5 @@
 package com.wwg.gabozzago.domain.user.repository;
 
-import com.wwg.gabozzago.domain.post.entity.Post;
 import com.wwg.gabozzago.domain.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
