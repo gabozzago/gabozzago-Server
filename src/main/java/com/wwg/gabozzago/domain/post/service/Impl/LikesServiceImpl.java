@@ -25,7 +25,7 @@ public class LikesServiceImpl implements LikesService {
     @Override
     public boolean addLike(Long postId) {
         User user = userUtils.getCurrentUser();
-        Post post = postRepository.findById(postId).orElseThrow(()-> new UserNotFoundException(ErrorCode.USER_NOT_FOUND));
+        Post post = postRepository.findById(postId).orElseThrow(()-> new PostNotFoundException(ErrorCode.POST_NOT_FOUND));
 
         // 중복 좋아요 방지
         if(isNotAlreadyLike(post)) {
