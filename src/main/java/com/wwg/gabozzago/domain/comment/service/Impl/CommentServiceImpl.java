@@ -26,9 +26,9 @@ public class CommentServiceImpl implements CommentService {
 
     @Transactional
     @Override
-    public Long addComment(Long id, CommentRequestDto commentRequestDto) {
+    public Long addComment(Long postId, CommentRequestDto commentRequestDto) {
         User user = userUtils.getCurrentUser();
-        Post post = postRepository.findById(id).orElseThrow(()-> new PostNotFoundException(ErrorCode.POST_NOT_FOUND));
+        Post post = postRepository.findById(postId).orElseThrow(()-> new PostNotFoundException(ErrorCode.POST_NOT_FOUND));
 
         commentRequestDto.setUser(user);
         commentRequestDto.setPost(post);
