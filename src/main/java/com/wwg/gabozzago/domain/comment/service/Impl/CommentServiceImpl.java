@@ -42,8 +42,8 @@ public class CommentServiceImpl implements CommentService {
     //댓글 삭제
     @Transactional
     @Override
-    public void delete(Long id) {
-        Comment comment = commentRepository.findById(id).orElseThrow(() -> new CommentNotFoundException(ErrorCode.COMMENT_NOT_FOUND));
+    public void delete(Long commentId) {
+        Comment comment = commentRepository.findById(commentId).orElseThrow(() -> new CommentNotFoundException(ErrorCode.COMMENT_NOT_FOUND));
         commentRepository.delete(comment);
     }
 }
