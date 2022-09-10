@@ -9,19 +9,19 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/post")
+@RequestMapping("/comment")
 public class CommentApiController {
     private final CommentService commentService;
 
     // 댓글 생성
-    @PostMapping("/{postId}/comment")
-    public ResponseEntity<?> addComment(@PathVariable Long postId, @RequestBody CommentRequestDto commentRequestDto){
-        return new ResponseEntity<>(commentService.addComment(postId,commentRequestDto),HttpStatus.CREATED);
+    @PostMapping
+    public ResponseEntity<?> addComment(@RequestBody CommentRequestDto commentRequestDto){
+        return new ResponseEntity<>(commentService.addComment(commentRequestDto.getContent(),commentRequestDto.getPost().getId()),HttpStatus.CREATED);
     }
 
     //댓글 삭제
-    @DeleteMapping("/{postId}/comment/{commentId}")
-    public ResponseEntity<?> delete(@PathVariable Long postId, @PathVariable Long commentId) {
+    @DeleteMapping("/{commentId}")
+    public ResponseEntity<?> delete(@PathVariable Long commentId) {
         commentService.delete(commentId);
         return new ResponseEntity<>("댓글 삭제 성공!!",HttpStatus.OK);
     }
