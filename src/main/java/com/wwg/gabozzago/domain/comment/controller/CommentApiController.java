@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/comment/{id}")
+@RequestMapping("/post/{id}")
 public class CommentApiController {
     private final CommentService commentService;
 
@@ -19,4 +19,10 @@ public class CommentApiController {
         return new ResponseEntity<>(commentService.addComment(id,commentRequestDto),HttpStatus.CREATED);
     }
 
+    //댓글 삭제
+    @DeleteMapping("/comment/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id) {
+        commentService.delete(id);
+        return new ResponseEntity<>("댓글 삭제 성공!!",HttpStatus.OK);
+    }
 }
