@@ -34,6 +34,7 @@ public class CommentServiceImpl implements CommentService {
                 .post(post)
                 .user(user)
                 .build();
+        comment.createDate();
         return commentRepository.save(comment);
     }
 

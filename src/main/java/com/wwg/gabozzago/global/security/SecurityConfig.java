@@ -48,8 +48,8 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.GET,"/post/").authenticated()
                 .antMatchers(HttpMethod.GET,"/post/likes").authenticated()
                 .antMatchers(HttpMethod.PUT,"/auth/logout").authenticated()
-                .antMatchers(HttpMethod.POST,"/post/**/comment").authenticated()
-                .antMatchers(HttpMethod.DELETE,"/post/**/comment/**").authenticated()
+                .antMatchers(HttpMethod.POST,"/comment/").authenticated()
+                .antMatchers(HttpMethod.DELETE,"/comment/**").authenticated()
 
                 .anyRequest().denyAll()
                 .and()

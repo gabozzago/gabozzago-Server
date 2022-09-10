@@ -13,10 +13,6 @@ import java.time.format.DateTimeFormatter;
 @NoArgsConstructor
 @Builder
 public class CommentRequestDto {
-    private Long id;
     private String content;
-    private String createDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm"));
-    private User user;
-    private Post post;
-
+    private Long postId;
 }

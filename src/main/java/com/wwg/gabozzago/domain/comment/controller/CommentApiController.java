@@ -16,7 +16,7 @@ public class CommentApiController {
     // 댓글 생성
     @PostMapping
     public ResponseEntity<?> addComment(@RequestBody CommentRequestDto commentRequestDto){
-        return new ResponseEntity<>(commentService.addComment(commentRequestDto.getContent(),commentRequestDto.getPost().getId()),HttpStatus.CREATED);
+        return new ResponseEntity<>(commentService.addComment(commentRequestDto.getContent(),commentRequestDto.getPostId()),HttpStatus.CREATED);
     }
 
     //댓글 삭제
