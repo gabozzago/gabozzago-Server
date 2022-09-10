@@ -8,6 +8,7 @@ import com.wwg.gabozzago.domain.post.entity.Post;
 import com.wwg.gabozzago.domain.user.entity.User;
 import com.wwg.gabozzago.domain.user.post.repository.PostRepository;
 import com.wwg.gabozzago.global.error.ErrorCode;
+import com.wwg.gabozzago.global.error.exception.CommentNotFoundException;
 import com.wwg.gabozzago.global.error.exception.PostNotFoundException;
 import com.wwg.gabozzago.global.user.utils.UserUtils;
 import lombok.RequiredArgsConstructor;
@@ -36,5 +37,13 @@ public class CommentServiceImpl implements CommentService {
         commentRepository.save(comment);
 
         return commentRequestDto.getId();
+    }
+
+    //댓글 삭제
+    @Transactional
+    @Override
+    public void delete(Long id) {
+        Comment comment = commentRepository.findById(id).orElseThrow(() -> new CommentNotFoundException(ErrorCode.COMMENT_NOT_FOUND));
+        commentRepository.delete(comment);
     }
 }
