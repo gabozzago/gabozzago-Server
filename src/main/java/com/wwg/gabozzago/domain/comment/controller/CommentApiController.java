@@ -14,15 +14,15 @@ public class CommentApiController {
     private final CommentService commentService;
 
     // 댓글 생성
-    @PostMapping("/{id}")
-    public ResponseEntity<?> addComment(@PathVariable Long id, @RequestBody CommentRequestDto commentRequestDto){
-        return new ResponseEntity<>(commentService.addComment(id,commentRequestDto),HttpStatus.CREATED);
+    @PostMapping("/{postId}/comment")
+    public ResponseEntity<?> addComment(@PathVariable Long postId, @RequestBody CommentRequestDto commentRequestDto){
+        return new ResponseEntity<>(commentService.addComment(postId,commentRequestDto),HttpStatus.CREATED);
     }
 
     //댓글 삭제
-    @DeleteMapping("/{id}/comment/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id) {
-        commentService.delete(id);
+    @DeleteMapping("/{postId}/comment/{commentId}")
+    public ResponseEntity<?> delete(@PathVariable Long commentId, @PathVariable Long postId) {
+        commentService.delete(commentId);
         return new ResponseEntity<>("댓글 삭제 성공!!",HttpStatus.OK);
     }
 }
