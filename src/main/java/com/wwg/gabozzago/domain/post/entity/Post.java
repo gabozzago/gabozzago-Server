@@ -1,7 +1,6 @@
 package com.wwg.gabozzago.domain.post.entity;
 
 import com.wwg.gabozzago.domain.comment.entity.Comment;
-import com.wwg.gabozzago.domain.image.entity.Img;
 import com.wwg.gabozzago.domain.user.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
