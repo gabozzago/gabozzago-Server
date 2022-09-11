@@ -79,7 +79,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public DetailPageCommentDto getDetailPage(Long id) {
         Post postInfo = postRepository.findById(id).orElseThrow(()->new PostNotFoundException(ErrorCode.POST_NOT_FOUND));
-        Comment commentInfo = commentRepository.findCommentsByPostInfo(postInfo);
+        Comment commentInfo = commentRepository.findCommentsByPost(postInfo);
         return null;
     }
 
