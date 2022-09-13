@@ -28,7 +28,7 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public Comment addComment(String content, Long postId) {
         User user = userUtils.getCurrentUser();
-        Post post = postRepository.findById(postId).orElseThrow(()-> new PostNotFoundException(ErrorCode.POST_NOT_FOUND));
+        Post post = postRepository.findById(postId).orElseThrow(() -> new PostNotFoundException(ErrorCode.POST_NOT_FOUND));
 
         Comment comment = Comment.builder()
                 .content(content)
