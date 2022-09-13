@@ -21,8 +21,15 @@ public class CommentApiController {
 
     //댓글 삭제
     @DeleteMapping("/{commentId}")
-    public ResponseEntity<?> delete(@PathVariable Long commentId) {
+    public ResponseEntity<?> delete(@PathVariable Long commentId){
         commentService.delete(commentId);
         return new ResponseEntity<>("댓글 삭제 성공!!",HttpStatus.OK);
+    }
+
+    //댓글 수정
+    @PutMapping("/{commentId}")
+    public ResponseEntity<?> update(@PathVariable Long commentId, @RequestBody CommentRequestDto dto){
+        commentService.update(commentId, dto);
+        return new ResponseEntity<>("댓글 수정 성공!!",HttpStatus.OK);
     }
 }
