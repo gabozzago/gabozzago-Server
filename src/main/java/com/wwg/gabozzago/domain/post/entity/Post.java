@@ -45,6 +45,12 @@ public class Post {
     @OneToMany(mappedBy = "post")
     private List<Comment> commentList;
 
+    public void update(String content, String title,String postImg){
+        this.content = content;
+        this.title = title;
+        this.postImg = postImg;
+    }
+
     public void updateLikeState(boolean likesState){
         this.likesState = likesState;
     }
