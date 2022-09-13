@@ -40,4 +40,7 @@ public class Comment {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Post post;
 
+    public void update(String content) {
+        this.content = content;
+    }
 }
