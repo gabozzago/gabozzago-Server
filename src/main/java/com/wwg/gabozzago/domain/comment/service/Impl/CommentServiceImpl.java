@@ -1,5 +1,6 @@
 package com.wwg.gabozzago.domain.comment.service.Impl;
 
+import com.wwg.gabozzago.domain.comment.data.request.CommentRequestDto;
 import com.wwg.gabozzago.domain.comment.entity.Comment;
 import com.wwg.gabozzago.domain.comment.repository.CommentRepository;
 import com.wwg.gabozzago.domain.comment.service.CommentService;
@@ -44,5 +45,13 @@ public class CommentServiceImpl implements CommentService {
     public void delete(Long commentId) {
         Comment comment = commentRepository.findById(commentId).orElseThrow(() -> new CommentNotFoundException(ErrorCode.COMMENT_NOT_FOUND));
         commentRepository.delete(comment);
+    }
+
+    //댓글 수정
+    @Transactional
+    @Override
+    public void update(Long commentId, CommentRequestDto dto) {
+        Comment comment = commentRepository.findById(commentId).orElseThrow(() -> new CommentNotFoundException(ErrorCode.COMMENT_NOT_FOUND));
+        comment.update(dto.getContent());
     }
 }
