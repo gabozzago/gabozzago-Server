@@ -10,7 +10,7 @@ import com.wwg.gabozzago.global.error.exception.PostNotFoundException;
 import com.wwg.gabozzago.domain.user.post.repository.PostRepository;
 import com.wwg.gabozzago.domain.post.service.PostService;
 import com.wwg.gabozzago.global.user.utils.UserUtils;
-import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -19,11 +19,16 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
-@RequiredArgsConstructor
 public class PostServiceImpl implements PostService {
     private final PostRepository postRepository;
     private final UserUtils userUtils;
     private final LikesRepository likesRepository;
+
+    public PostServiceImpl(@Lazy PostRepository postRepository,@Lazy UserUtils userUtils,@Lazy LikesRepository likesRepository) {
+        this.postRepository = postRepository;
+        this.userUtils = userUtils;
+        this.likesRepository = likesRepository;
+    }
 
     //게시물 생성
     @Override

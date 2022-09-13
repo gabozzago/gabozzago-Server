@@ -11,18 +11,23 @@ import com.wwg.gabozzago.global.error.ErrorCode;
 import com.wwg.gabozzago.global.error.exception.CommentNotFoundException;
 import com.wwg.gabozzago.global.error.exception.PostNotFoundException;
 import com.wwg.gabozzago.global.user.utils.UserUtils;
-import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
-@RequiredArgsConstructor
 @Service
 public class CommentServiceImpl implements CommentService {
 
     private final CommentRepository commentRepository;
     private final PostRepository postRepository;
     private final UserUtils userUtils;
+
+    public CommentServiceImpl(@Lazy CommentRepository commentRepository,@Lazy PostRepository postRepository,@Lazy UserUtils userUtils) {
+        this.commentRepository = commentRepository;
+        this.postRepository = postRepository;
+        this.userUtils = userUtils;
+    }
 
     @Transactional
     @Override

@@ -9,18 +9,24 @@ import com.wwg.gabozzago.domain.post.service.LikesService;
 import com.wwg.gabozzago.domain.post.service.PostService;
 import com.wwg.gabozzago.domain.user.entity.User;
 import com.wwg.gabozzago.global.user.utils.UserUtils;
-import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@RequiredArgsConstructor
 @RestController
 @RequestMapping("/post")
 public class PostApiController {
     private final PostService postService;
     private final LikesService likesService;
     private final UserUtils userUtils;
+
+    public PostApiController(@Lazy PostService postService, @Lazy LikesService likesService, @Lazy UserUtils userUtils) {
+        this.postService = postService;
+        this.likesService = likesService;
+        this.userUtils = userUtils;
+    }
+
     //게시물 생성
     @PostMapping("/create")
     public ResponseEntity<Void> save(@RequestBody CreatePostRequestDto createPostRequestDto){
