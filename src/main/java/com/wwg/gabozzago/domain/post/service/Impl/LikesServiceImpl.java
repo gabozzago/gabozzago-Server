@@ -7,19 +7,23 @@ import com.wwg.gabozzago.domain.user.entity.User;
 import com.wwg.gabozzago.domain.post.repository.LikesRepository;
 import com.wwg.gabozzago.global.error.ErrorCode;
 import com.wwg.gabozzago.global.error.exception.PostNotFoundException;
-import com.wwg.gabozzago.global.error.exception.UserNotFoundException;
 import com.wwg.gabozzago.domain.user.post.repository.PostRepository;
 import com.wwg.gabozzago.global.user.utils.UserUtils;
-import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@RequiredArgsConstructor
 @Service
 public class LikesServiceImpl implements LikesService {
     private final LikesRepository likesRepository;
     private final UserUtils userUtils;
     private final PostRepository postRepository;
+
+    public LikesServiceImpl(@Lazy LikesRepository likesRepository,@Lazy UserUtils userUtils,@Lazy PostRepository postRepository) {
+        this.likesRepository = likesRepository;
+        this.userUtils = userUtils;
+        this.postRepository = postRepository;
+    }
 
     @Transactional
     @Override

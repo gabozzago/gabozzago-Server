@@ -50,6 +50,7 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.PUT,"/auth/logout").authenticated()
                 .antMatchers(HttpMethod.POST,"/comment/").authenticated()
                 .antMatchers(HttpMethod.DELETE,"/comment/**").authenticated()
+                .antMatchers(HttpMethod.PUT,"/comment/**").authenticated()
 
                 .anyRequest().denyAll()
                 .and()
