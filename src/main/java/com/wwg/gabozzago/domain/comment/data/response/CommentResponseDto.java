@@ -22,7 +22,7 @@ public class CommentResponseDto {
     // Entity -> Dto
     public CommentResponseDto(Comment comment){
         this.id = comment.getId();
-        this.creatDate = comment.getCreateDate();
+        this.creatDate = String.valueOf(comment.getCreateDate());
         this.userEmail = comment.getUser().getEmail();
         this.postId = comment.getPost().getId();
         this.content = comment.getContent();

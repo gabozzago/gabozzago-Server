@@ -1,7 +1,6 @@
 package com.wwg.gabozzago.domain.post.entity;
 
 import com.wwg.gabozzago.domain.comment.entity.Comment;
-import com.wwg.gabozzago.domain.image.entity.Img;
 import com.wwg.gabozzago.domain.user.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -45,6 +44,12 @@ public class Post {
 
     @OneToMany(mappedBy = "post")
     private List<Comment> commentList;
+
+    public void update(String content, String title,String postImg){
+        this.content = content;
+        this.title = title;
+        this.postImg = postImg;
+    }
 
     public void updateLikeState(boolean likesState){
         this.likesState = likesState;

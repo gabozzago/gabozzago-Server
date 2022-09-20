@@ -8,25 +8,11 @@ import lombok.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-@Data
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class CommentRequestDto {
-    private Long id;
     private String content;
-    private String createDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm"));
-    private User user;
-    private Post post;
-
-    // Dto -> Entity
-    public Comment toEntity(){
-        return Comment.builder()
-                .id(id)
-                .content(content)
-                .createDate(createDate)
-                .user(user)
-                .post(post)
-                .build();
-    }
+    private Long postId;
 }
