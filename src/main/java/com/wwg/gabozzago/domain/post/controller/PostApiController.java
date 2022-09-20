@@ -69,6 +69,7 @@ public class PostApiController {
     }
     @GetMapping("/detail/{postId}")
     public ResponseEntity<DetailPageResponse> getDetailPage(@PathVariable Long postId){
-        return null;
+        DetailPageResponse pageResponse = postService.getDetailPage(postId);
+        return new ResponseEntity<>(pageResponse,HttpStatus.OK);
     }
 }

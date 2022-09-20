@@ -1,13 +1,12 @@
 package com.wwg.gabozzago.domain.post.service.Impl;
 
-import com.wwg.gabozzago.domain.comment.data.dto.DetailPageCommentDto;
+import com.wwg.gabozzago.domain.comment.data.response.DetailPageCommentResponse;
 import com.wwg.gabozzago.domain.comment.entity.Comment;
 import com.wwg.gabozzago.domain.comment.repository.CommentRepository;
+import com.wwg.gabozzago.domain.post.data.dto.CommentListDto;
 import com.wwg.gabozzago.domain.post.data.request.CreatePostRequestDto;
-import com.wwg.gabozzago.domain.post.data.response.LikedPostListResponse;
-import com.wwg.gabozzago.domain.post.data.response.LikedPostResponse;
-import com.wwg.gabozzago.domain.post.data.response.MainPageResponse;
-import com.wwg.gabozzago.domain.post.data.response.PostResponse;
+import com.wwg.gabozzago.domain.post.data.response.*;
+import com.wwg.gabozzago.domain.post.entity.Likes;
 import com.wwg.gabozzago.domain.post.entity.Post;
 import com.wwg.gabozzago.domain.post.repository.LikesRepository;
 import com.wwg.gabozzago.domain.user.entity.User;
@@ -77,25 +76,47 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public DetailPageCommentDto getDetailPage(Long id) {
+    public DetailPageResponse getDetailPage(Long id) {
+        User user = userUtils.getCurrentUser();
         Post postInfo = postRepository.findById(id).orElseThrow(()->new PostNotFoundException(ErrorCode.POST_NOT_FOUND));
-        Comment commentInfo = commentRepository.findCommentsByPost(postInfo);
-        return null;
+        List<DetailPageCommentResponse> commentList = getCommentInfo(user,postInfo);
+        List<Likes> likes = likesRepository.findByPost(postInfo);
+        Boolean liked = checkLiked(user,postInfo);
+        Boolean mine = checkMine(user,postInfo);
+        DetailPageResponse detailPageResponse = new DetailPageResponse(user,postInfo,commentList,likes,liked,mine);
+        return detailPageResponse;
     }
 
     private List<LikedPostResponse> findAllLikedPostInfo() {
         List<LikedPostResponse> list = new ArrayList<>();
         User currentUser = userUtils.getCurrentUser();
-        likesRepository.findAll().forEach(likes -> {
-            if(likes.getUser() == currentUser){
-                String userName = likes.getUser().getName();
-                String userImg = likes.getUser().getUserImg();
-                String title = likes.getPost().getTitle();
-                String location = likes.getPost().getLocation();
-                String postImg = likes.getPost().getPostImg();
-                list.add(new LikedPostResponse(userName,userImg,title,location,postImg,true));
-            }
+        likesRepository.findAll().stream().filter(likes -> likes.getUser() == currentUser).forEach(likes -> {
+            String userName = likes.getUser().getName();
+            String userImg = likes.getUser().getUserImg();
+            String title = likes.getPost().getTitle();
+            String location = likes.getPost().getLocation();
+            String postImg = likes.getPost().getPostImg();
+            list.add(new LikedPostResponse(userName, userImg, title, location, postImg, true));
         });
         return list;
+    }
+    private List<DetailPageCommentResponse> getCommentInfo(User user,Post post){
+        List<Comment> commentInfo = commentRepository.findCommentsByPost(post);
+        List<DetailPageCommentResponse> list = new ArrayList<>();
+        commentInfo.forEach(comment -> {
+            if (comment.getUser() == user) {
+                DetailPageCommentResponse commentListDto = new DetailPageCommentResponse(comment.getUser().getName(), comment.getUser().getUserImg(), comment.getContent(), comment.getCreateDate(), false);
+                list.add(commentListDto);
+            }
+            DetailPageCommentResponse commentListDto = new DetailPageCommentResponse(comment.getUser().getName(), comment.getUser().getUserImg(), comment.getContent(), comment.getCreateDate(), true);
+            list.add(commentListDto);
+        });
+        return list;
+    }
+    private Boolean checkLiked(User user,Post post){
+        return likesRepository.existsByPostAndUser(user,post);
+    }
+    private Boolean checkMine(User user,Post post){
+        return postRepository.existsByUserAndUser(user,post);
     }
 }

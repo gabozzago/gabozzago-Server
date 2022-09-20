@@ -1,10 +1,11 @@
-package com.wwg.gabozzago.domain.comment.data.response;
+package com.wwg.gabozzago.domain.post.data.dto;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+
 @Getter
 @RequiredArgsConstructor
-public class DetailPageCommentResponse {
+public class CommentListDto {
     private final String userName;
     private final String img;
     private final String content;
