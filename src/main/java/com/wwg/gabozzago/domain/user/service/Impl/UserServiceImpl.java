@@ -1,7 +1,7 @@
 package com.wwg.gabozzago.domain.user.service.Impl;
 
 import com.wwg.gabozzago.domain.user.repository.UserRepository;
-import com.wwg.gabozzago.domain.user.post.repository.PostRepository;
+import com.wwg.gabozzago.domain.post.repository.PostRepository;
 import com.wwg.gabozzago.domain.user.data.dto.MyPageDto;
 import com.wwg.gabozzago.domain.user.entity.User;
 import com.wwg.gabozzago.domain.user.service.UserService;

@@ -2,6 +2,7 @@ package com.wwg.gabozzago.domain.post.controller;
 
 
 import com.wwg.gabozzago.domain.post.data.request.CreatePostRequestDto;
+import com.wwg.gabozzago.domain.post.data.response.DetailPageResponse;
 import com.wwg.gabozzago.domain.post.data.response.LikedPostListResponse;
 import com.wwg.gabozzago.domain.post.data.response.MainPageResponse;
 import com.wwg.gabozzago.domain.post.data.response.PostUpdateResponse;
@@ -79,5 +80,10 @@ public class PostApiController {
     public ResponseEntity<LikedPostListResponse> getLikedPostList(){
         LikedPostListResponse likedPostList = postService.getLikedPostList();
         return new ResponseEntity<>(likedPostList,HttpStatus.OK);
+    }
+    @GetMapping("/detail/{postId}")
+    public ResponseEntity<DetailPageResponse> getDetailPage(@PathVariable Long postId){
+        DetailPageResponse pageResponse = postService.getDetailPage(postId);
+        return new ResponseEntity<>(pageResponse,HttpStatus.OK);
     }
 }

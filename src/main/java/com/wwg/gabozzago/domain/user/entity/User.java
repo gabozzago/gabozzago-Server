@@ -1,13 +1,9 @@
 package com.wwg.gabozzago.domain.user.entity;
 
-import com.wwg.gabozzago.domain.post.entity.Post;
 import lombok.*;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
-import java.util.List;
 
 
 @Entity

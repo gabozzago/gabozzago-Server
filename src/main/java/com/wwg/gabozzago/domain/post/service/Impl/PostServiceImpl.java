@@ -1,13 +1,17 @@
 package com.wwg.gabozzago.domain.post.service.Impl;
 
+import com.wwg.gabozzago.domain.comment.data.response.DetailPageCommentResponse;
+import com.wwg.gabozzago.domain.comment.entity.Comment;
+import com.wwg.gabozzago.domain.comment.repository.CommentRepository;
 import com.wwg.gabozzago.domain.post.data.request.CreatePostRequestDto;
 import com.wwg.gabozzago.domain.post.data.response.*;
+import com.wwg.gabozzago.domain.post.entity.Likes;
 import com.wwg.gabozzago.domain.post.entity.Post;
 import com.wwg.gabozzago.domain.post.repository.LikesRepository;
 import com.wwg.gabozzago.domain.user.entity.User;
 import com.wwg.gabozzago.global.error.ErrorCode;
 import com.wwg.gabozzago.global.error.exception.PostNotFoundException;
-import com.wwg.gabozzago.domain.user.post.repository.PostRepository;
+import com.wwg.gabozzago.domain.post.repository.PostRepository;
 import com.wwg.gabozzago.domain.post.service.PostService;
 import com.wwg.gabozzago.global.user.utils.UserUtils;
 import org.springframework.context.annotation.Lazy;
@@ -24,12 +28,14 @@ public class PostServiceImpl implements PostService {
     private final UserUtils userUtils;
     private final LikesRepository likesRepository;
 
-    public PostServiceImpl(@Lazy PostRepository postRepository,@Lazy UserUtils userUtils,@Lazy LikesRepository likesRepository) {
+    private final CommentRepository commentRepository;
+
+    public PostServiceImpl(@Lazy PostRepository postRepository,@Lazy UserUtils userUtils,@Lazy LikesRepository likesRepository,@Lazy CommentRepository commentRepository) {
         this.postRepository = postRepository;
         this.userUtils = userUtils;
         this.likesRepository = likesRepository;
+        this.commentRepository = commentRepository;
     }
-
     //게시물 생성
     @Override
     @Transactional
@@ -53,6 +59,7 @@ public class PostServiceImpl implements PostService {
         Post post = postRepository.findById(id).orElseThrow(() -> new
                 PostNotFoundException(ErrorCode.POST_NOT_FOUND));
         postRepository.delete(post);
+
     }
 
     //메인 페이지
@@ -84,19 +91,48 @@ public class PostServiceImpl implements PostService {
         return new LikedPostListResponse(likedPostResponseList);
     }
 
+    @Override
+    public DetailPageResponse getDetailPage(Long id) {
+        User user = userUtils.getCurrentUser();
+        Post postInfo = postRepository.findById(id).orElseThrow(()->new PostNotFoundException(ErrorCode.POST_NOT_FOUND));
+        List<DetailPageCommentResponse> commentList = getCommentInfo(user,postInfo);
+        List<Likes> likes = likesRepository.findByPost(postInfo);
+        Boolean liked = checkLiked(user,postInfo);
+        Boolean mine = checkMine(user,postInfo);
+        DetailPageResponse detailPageResponse = new DetailPageResponse(user,postInfo,commentList,likes,liked,mine);
+        return detailPageResponse;
+    }
+
     private List<LikedPostResponse> findAllLikedPostInfo() {
         List<LikedPostResponse> list = new ArrayList<>();
         User currentUser = userUtils.getCurrentUser();
-        likesRepository.findAll().forEach(likes -> {
-            if (likes.getUser() == currentUser) {
-                String userName = likes.getUser().getName();
-                String userImg = likes.getUser().getUserImg();
-                String title = likes.getPost().getTitle();
-                String location = likes.getPost().getLocation();
-                String postImg = likes.getPost().getPostImg();
-                list.add(new LikedPostResponse(userName, userImg, title, location, postImg, true));
-            }
+        likesRepository.findAll().stream().filter(likes -> likes.getUser() == currentUser).forEach(likes -> {
+            String userName = likes.getUser().getName();
+            String userImg = likes.getUser().getUserImg();
+            String title = likes.getPost().getTitle();
+            String location = likes.getPost().getLocation();
+            String postImg = likes.getPost().getPostImg();
+            list.add(new LikedPostResponse(userName, userImg, title, location, postImg, true));
         });
         return list;
+    }
+    private List<DetailPageCommentResponse> getCommentInfo(User user,Post post){
+        List<Comment> commentInfo = commentRepository.findCommentsByPost(post);
+        List<DetailPageCommentResponse> list = new ArrayList<>();
+        commentInfo.forEach(comment -> {
+            if (comment.getUser() == user) {
+                DetailPageCommentResponse commentListDto = new DetailPageCommentResponse(comment.getUser().getName(), comment.getUser().getUserImg(), comment.getContent(), comment.getCreateDate(), false);
+                list.add(commentListDto);
+            }
+            DetailPageCommentResponse commentListDto = new DetailPageCommentResponse(comment.getUser().getName(), comment.getUser().getUserImg(), comment.getContent(), comment.getCreateDate(), true);
+            list.add(commentListDto);
+        });
+        return list;
+    }
+    private Boolean checkLiked(User user,Post post){
+        return likesRepository.existsByPostAndUser(post,user);
+    }
+    private Boolean checkMine(User user,Post post){
+        return post.getUser() == user;
     }
 }
