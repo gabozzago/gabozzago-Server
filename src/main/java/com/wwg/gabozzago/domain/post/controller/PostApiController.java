@@ -2,10 +2,8 @@ package com.wwg.gabozzago.domain.post.controller;
 
 
 import com.wwg.gabozzago.domain.post.data.request.CreatePostRequestDto;
-import com.wwg.gabozzago.domain.post.data.response.DetailPageResponse;
-import com.wwg.gabozzago.domain.post.data.response.LikedPostListResponse;
-import com.wwg.gabozzago.domain.post.data.response.MainPageResponse;
-import com.wwg.gabozzago.domain.post.data.response.PostUpdateResponse;
+import com.wwg.gabozzago.domain.post.data.request.FindPostRequest;
+import com.wwg.gabozzago.domain.post.data.response.*;
 import com.wwg.gabozzago.domain.post.service.LikesService;
 import com.wwg.gabozzago.domain.post.service.PostService;
 import com.wwg.gabozzago.domain.user.entity.User;
@@ -14,6 +12,8 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/post")
@@ -85,5 +85,10 @@ public class PostApiController {
     public ResponseEntity<DetailPageResponse> getDetailPage(@PathVariable Long postId){
         DetailPageResponse pageResponse = postService.getDetailPage(postId);
         return new ResponseEntity<>(pageResponse,HttpStatus.OK);
+    }
+    @GetMapping("find")
+    public ResponseEntity<List<FindPostResponse>> getSearchPost(@RequestParam FindPostRequest findPostRequest){
+        List<FindPostResponse> findPostResponse = postService.getFindPost(findPostRequest.getTitle());
+        return new ResponseEntity<>(findPostResponse,HttpStatus.OK);
     }
 }
