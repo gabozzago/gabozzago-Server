@@ -1,10 +1,9 @@
 package com.wwg.gabozzago.domain.post.service;
 
 import com.wwg.gabozzago.domain.post.data.request.CreatePostRequestDto;
-import com.wwg.gabozzago.domain.post.data.response.DetailPageResponse;
-import com.wwg.gabozzago.domain.post.data.response.LikedPostListResponse;
-import com.wwg.gabozzago.domain.post.data.response.MainPageResponse;
-import com.wwg.gabozzago.domain.post.data.response.PostUpdateResponse;
+import com.wwg.gabozzago.domain.post.data.response.*;
+
+import java.util.List;
 
 public interface PostService {
      //게시물 등록
@@ -18,4 +17,6 @@ public interface PostService {
      LikedPostListResponse getLikedPostList();
 
      DetailPageResponse getDetailPage(Long id);
+     List<FindPostResponse> getFindPost(String title);
+
 }

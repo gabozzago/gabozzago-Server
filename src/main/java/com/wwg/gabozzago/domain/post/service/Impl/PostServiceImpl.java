@@ -103,6 +103,18 @@ public class PostServiceImpl implements PostService {
         return detailPageResponse;
     }
 
+    @Override
+    public List<FindPostResponse> getFindPost(String title) {
+        User user = userUtils.getCurrentUser();
+        List<Post> postList = postRepository.findByTitleContaining(title);
+        List<FindPostResponse> findPostResponses = new ArrayList<>();
+        postList.stream().forEach(post->{
+            FindPostResponse findPostResponse = new FindPostResponse(post,checkLiked(user,post));
+            findPostResponses.add(findPostResponse);
+        });
+        return findPostResponses;
+    }
+
     private List<LikedPostResponse> findAllLikedPostInfo() {
         List<LikedPostResponse> list = new ArrayList<>();
         User currentUser = userUtils.getCurrentUser();
