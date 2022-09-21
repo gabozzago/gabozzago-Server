@@ -15,5 +15,5 @@ public interface LikesRepository extends JpaRepository<Likes, Long> {
     Optional<Likes> findByPostAndUser(Post post, User user);
 
     List<Likes> findByPost(Post post);
-    Boolean existsByPostAndUser(User user,Post post);
+    Boolean existsByPostAndUser(Post post,User user);
 }

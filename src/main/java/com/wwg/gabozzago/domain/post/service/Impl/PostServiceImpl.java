@@ -130,9 +130,9 @@ public class PostServiceImpl implements PostService {
         return list;
     }
     private Boolean checkLiked(User user,Post post){
-        return likesRepository.existsByPostAndUser(user,post);
+        return likesRepository.existsByPostAndUser(post,user);
     }
     private Boolean checkMine(User user,Post post){
-        return postRepository.existsByUserAndUser(user,post);
+        return post.getUser() == user;
     }
 }

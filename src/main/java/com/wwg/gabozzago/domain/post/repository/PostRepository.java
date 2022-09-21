@@ -12,5 +12,4 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     List<String> getPostImg(User userInfo);
 
     void deletePostsByUser(User userInfo);
-    Boolean existsByUserAndUser(User user,Post post);
 }
